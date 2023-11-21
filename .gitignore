@@ -1,7 +1,5 @@
 # Test file
-my_test.py
-my_test2.py
-my_test3.py
+my_test**.py
 
 # Pycharm project
 .idea/
