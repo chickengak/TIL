@@ -1,0 +1,7 @@
+1. Use Recursion
+2. Use dict, set appropriately
+3. Use try except
+4. Use Fewer loops
+5. Use list comprehension
+6. Use Mathematics
+7. Use integer instead of float
