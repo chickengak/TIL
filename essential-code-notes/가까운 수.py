@@ -1,6 +1,6 @@
 """
-I
-G
+I: a list of integers. and an integer n
+G: Return the value in the integers closest to n.
 https://school.programmers.co.kr/learn/courses/30/lessons/120890
 """
 

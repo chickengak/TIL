@@ -1,6 +1,6 @@
 """
-I
-G
+I: a list of integers
+G: Find all "7" in integers
 https://school.programmers.co.kr/learn/courses/30/lessons/120912
 """
 

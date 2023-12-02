@@ -1,6 +1,7 @@
 """
-I
-G
+I: a list of integers
+G: Find the biggest number and its index.
+https://school.programmers.co.kr/learn/courses/30/lessons/120899
 """
 
 
@@ -18,3 +19,4 @@ def solution(array):
             idx = i
     return [max, idx]
 # I thought these two functions, but I submitted the first one. Because the code is shorter excluding efficiency.
+# Yes I know, the max method's time complexity is O(n).
