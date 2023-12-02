@@ -1,3 +1,9 @@
+"""
+I: 
+G: 
+https://school.programmers.co.kr/learn/courses/30/lessons/120854
+"""
+
 def solution(s):
     return list(map( lambda x: len(x), s))
 
@@ -5,3 +11,7 @@ def solution(s):
 
 def solution(strlist):
     return list(map(len, strlist))
+
+
+def solution(strlist):
+    return [len(str) for str in strlist]

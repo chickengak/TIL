@@ -1,6 +1,6 @@
 """
-I
-G
+I: a string A. And a string B representing pushed A.
+G: Return the minimum number of shifts needed to push A to the right and become B. If it's not possible, return -1.
 https://school.programmers.co.kr/learn/courses/30/lessons/120921
 """
 
@@ -17,5 +17,5 @@ def solution(A, B):
 # Others' answer
 def solution(A, B):
     return (B * 2).find(A)
-
+# I think it's a nice using of the find method.
 

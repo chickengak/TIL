@@ -8,6 +8,7 @@ https://school.programmers.co.kr/learn/courses/30/lessons/120899
 # My answers
 def solution(l):
     return [max(l), l.index(max(l))]
+# 0.01sec
 
 
 def solution(array):
@@ -18,5 +19,6 @@ def solution(array):
             max = t
             idx = i
     return [max, idx]
+#0.009sec
 # I thought these two functions, but I submitted the first one. Because the code is shorter excluding efficiency.
 # Yes I know, the max method's time complexity is O(n).

@@ -1,6 +1,7 @@
 """
 Input: a list of integers   ( 1 <= len(list) <= 1000 , 0 <= integer <= 1000 )
 Goal: Reverse the list
+https://school.programmers.co.kr/learn/courses/30/lessons/120821
 """
 
 

@@ -15,10 +15,11 @@ def cnt7(n):
 
 def solution(array):
     return sum(cnt7(i) for i in array)
-# I used recursion
+# 0.022sec. I used recursion and mathematics.
 
 
 # Others' answer
 def solution(array):
     return str(array).count('7')
+# 0.01sec.
 # But there was such a simple answer. It converted list to str and counted 7.

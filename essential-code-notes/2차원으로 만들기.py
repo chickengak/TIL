@@ -14,7 +14,8 @@ def solution(num_list, n):
             t_l.append(num_list[j])
         answer.append(t_l)
     return answer
-# It's my first answer. and second is what I removed nested loop.
+# 0.023 sec.
+# This is my first answer. And the second one is without the nested loop.
 
 
 def solution(num_list, n):
@@ -22,4 +23,5 @@ def solution(num_list, n):
     for i in range(0, len(num_list), n):
         answer.append(num_list[i:i+n])
     return answer
+# 0.013 sec.
 # My second answer is using the slicing. So I reduced the use of the append method.
