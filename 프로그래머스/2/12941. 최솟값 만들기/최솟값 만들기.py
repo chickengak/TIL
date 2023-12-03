@@ -1,4 +1,2 @@
 def solution(A,B):
-    A.sort()
-    B.sort(reverse=True)
-    return sum([A[i]*B[i] for i in range(len(A))])
+    return sum(map(lambda a,b : a*b, sorted(A), sorted(B, reverse=True)))
