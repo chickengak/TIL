@@ -130,6 +130,18 @@ cf) ~~갑자기 다른 말이지만 github외에 bitbucket, gitlab, jira도 있�
 
 <br>
 <br>
+
+## Git - **my notes**
+### remote에 올라간 최신 커밋 취소.
+사용에 매우매우매우 주의해야 한다. 협업자가 이미 pull을 했다면 상당히 골치아파지기 때문. revert 사용을 권장.
+```commandline
+git reset --hard HEAD~1
+git push -f origin main
+```
+
+
+<br>
+<br>
 <br>
 <br>
 
