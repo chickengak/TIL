@@ -207,7 +207,7 @@ plt.show()
 # 2차원 데이터
 이젠 두 개의 데이터가 대응되는 자료를 다뤄보자. 영어와 수학점수를 가져온다.
 ```
-df = pd.read_csv("../data/ch2_scores_em.csv", index="student number")
+df = pd.read_csv("etc/ch2_scores_em.csv", index="student number")
 en_scores, ma_scores = np.array(df["english"])[:10], np.array(df["mathematics"])[:10]
 scores_df = pd.DataFrame({english: en_scores, mathematics: ma_scores}, index=pd.Index(["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"], name="student"))
 ```
@@ -234,7 +234,7 @@ numpy의 cov()메소드는 공분산 행렬 또는 분산공분산행렬이라�
 [0,1]과 [1,0]의 값이 우리가 얻고자 하는 영어와 수학의 공분산이고, [0,0]은 영어와 영어의 공분산, [1,1]은 수학과 수학의 공분산이다. 같은 데이터를 공분산했기에 각 데이터의 분산과 같다.
 
 ### 상관계수 correlation coefficient
-앞선 공분산에선 영어점수와 수학점수의 상관관계를 봤기 때문에 단위가 점수$^2$이다. 하지만 키와 점수의 상관관계를 본다면 단위가 cm x 점수가 된다.  
+앞선 공분산에선 영어점수와 수학점수의 상관관계를 봤기 때문에 단위가 $점수^2$이다. 하지만 키와 점수의 상관관계를 본다면 단위가 cm x 점수가 된다.  
 따라서 단위에 의존하지 않고 상관관계를 보여줄 지표를 만들기 위해 공분산을 각 데이터의 표준편차로 나누고 이를 __상관계수__ 라고 정의하게 된다.  
 상관계수는 $r$ $_x$ $_y$ 라고 표기한다.  
 상관계수는 반드시 -1 ~ 1 사이의 값을 취하고, 데이터가 양의 상관관계에 놓여 있을수록 1에 가까워지고, 음의 상관관계면 -1에 가까워지며, 무상관이면 0에 가까워진다.
