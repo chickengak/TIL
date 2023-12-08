@@ -164,6 +164,7 @@ V(X, g=lambda x: 2*x+3); 2**2 * V(X)    #8.889로 동일하다.
 ```
 
 <br>
+<br>
 
 # 2차원 이산형 확률변수
 
@@ -218,14 +219,49 @@ np.sum(prob)               # 1.000   확률의 성질 만족.
 <br>
 
 ## 주변확률분포
+확률변수 (X, Y)에서 하나에만 흥미가 있을 때.  
+만약 X 만의 움직임이 궁금하다면, $f_{XY}$에서 Y가 취할 수 있는 값 모두를 대입한 다음 모두 더한
 
+$f_X(x) = \displaystyle\sum_{k} f_{XY}(x, y_k)$
 
+이 형태로 구할 수 있다. 이러한 $f_X(x)$를 X의 __주변확률분포__ Marginal Probability Distribution 라고 한다.  
+
+```
+def f_X(x):
+    return np.sum([f_XY(x, y_k) for y_k in y_set])
+
+def f_Y(y):
+    return np.sum([f_XY(x_k, y) for x_k in x_set])
+
+X = [x_set, f_X]
+Y = [y_set, f_Y]
+```
+막대그래프로 직접 확인해보자.
+```
+prob_x = np.array([f_X(x_k) for x_k in x_set])
+prob_y = np.array([f_Y(y_k) for y_k in y_set])
+
+fig = plt.figure(figsize=(12,4))
+ax1 = fig.add_subplot(121); ax2 = fig.add_subplot(122)
+
+ax1.bar(x_set, prob_x)
+ax1.set_xlabel("X_value"); ax1.set_ylabel("propability")
+ax1.set_xticks(x_set)
+
+ax2.bar(y_set, prob_y)
+ax2.set_xlabel("Y_value"); ax2.set_ylabel("probability")
+ax2.set_xticks(y_set)
+plt.show()
+```
+
+<br>
+<br>
 
 # 2차원 이산형 확률변수의 지표
 2차원 이산형 확률변수에 관해서는 기댓값이나 분산이라는 지표와 함께 3장에서 공부한 공분산이나 상관계수라는 지표를 정의할 수 있다.
 
 ## 기댓값
-
+1차원 이산형 확률변수 즉, 확률질량함수때와 마찬가지로 $x_i$ 와 확률의 곱으로 구할 수 있다.
 
 
 
