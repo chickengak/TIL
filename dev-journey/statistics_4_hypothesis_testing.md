@@ -21,3 +21,7 @@
  - 계통추출법(systematic sampling)
  - 집락추출법(cluster sampling)
  - 층화추출법(stratified sampling)
+
+
+점추정과 구간추정? 흠
+
