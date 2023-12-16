@@ -121,3 +121,203 @@ NOW() STR_TO_DATE() SEC_TO_TIME() 등등
 
 
 
+distinct 키워드
+
+# 예제를 통한 실전 구문
+my_emp
+| empno | ename  | job       | mgr  | hiredate   | sal     | comm    | deptno | 
+|-------|--------|-----------|------|------------|---------|---------|--------|
+| 7369  | SMITH  | CLERK     | 7902 | 1980-12-17 | 800.00  |         | 20     | 
+| 7499  | ALLEN  | SALESMAN  | 7698 | 1981-02-20 | 1600.00 | 300.00  | 30     | 
+| 7521  | WARD   | SALESMAN  | 7698 | 1981-02-22 | 1250.00 | 500.00  | 30     |  
+| 7566  | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 |         | 20     |   
+| 7654  | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250.00 | 1400.00 | 30     |  
+| 7698  | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850.00 |         | 30     | 
+| 7782  | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 |         | 10     |   
+| 7788  | SCOTT  | ANALYST   | 7566 | 1987-04-19 | 3000.00 |         | 20     | 
+| 7839  | KING   | PRESIDENT |      | 1981-11-17 | 5000.00 |         | 10     | 
+| 7844  | TURNER | SALESMAN  | 7698 | 1981-09-08 | 1500.00 | 0.00    | 30     |
+| 7876  | ADAMS  | CLERK     | 7788 | 1987-05-23 | 1100.00 |         | 20     |   
+| 7900  | JAMES  | CLERK     | 7698 | 1981-12-03 | 950.00  |         | 30     |   
+| 7902  | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 |         | 20     |  
+| 7934  | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 |         | 10     |  
+
+## Basic
+MySQL에서는 예약어만 대문자로 표기하고 SQL 함수를 포함한 나머지는 소문자로 쓰는게 관례다
+
+### USE　SELECT　FROM　DESC　SHOW TABLES
+```MySQL
+USE my_emp;
+SELECT * FROM my_emp;
+DESC my_emp;                 # 필드명(컬럼명), 데이터 타입, Null 유무,
+DESCRIBE my_emp;                   Key, Default, Extra 확인 가능
+SHOW TABLES;                 # 전체 테이블 확인
+SELECT * FROM emp,dept;      # 앞에 있는 emp 테이블에 맞춰 full join함
+```
+
+### AS
+```MySQL
+SELECT ename "사원 이름", empno '사원 번호'         FROM emp;   # 모두 같은 표현
+SELECT ename AS "사원 이름", empno AS '사원 번호'   FROM emp;
+SELECT ename AS 사원이름, empno AS 사원번호         FROM emp;   # 단, ''없으면 공백불가
+
+SELECT E.ename, E.sal FROM emp E;         # 테이블에 별칭을 주면 select가 편해진다.
+SELECT E.ename, E.sal FROM emp AS E;      # 단, '' "" 불가. 객체이름에 공백이 불가능한 이유랑 비슷
+
+SELECT ename, deptno, dname
+FROM emp, dept;         # 테이블 간 구분도 용이해진다. deptno 필드가 중복이라 오류나는데
+
+SELECT E.ename, E.deptno, dname
+FROM emp E, dept;       # 이럴 때, 별칭을 주면 오류가 발생하지 않는다.
+```
+
+### IFNULL　단순 연산
+```MySQL
+SELECT ename, sal*12 AS 연봉 FROM emp;
+
+SELECT ename, sal, comm, sal + comm AS 급여      # comm에 null이 있어서
+FROM emp;                                       # 연산결과인 급여에도 null이 생김
+
+SELECT ename, sal, comm, sal + ifnull(comm,0) AS 급여  # comm의 null을 0으로 처리함
+FROM emp;
+
+SELECT ename, ifnull(comm, "없음") AS 커미션        # 숫자외에도 가능
+FROM emp; 
+
+SELECT ename, sal, comm, ifnull(comm, sal) AS 커미션없으면급여   # 다른 필드로 대체 가능
+FROM emp;
+
+SELECT ename, sal, comm, sal * 0.85 + ifnull(comm, 0) AS 실수령액    # 종합
+FROM emp;
+```
+
+### WHERE　IN　AND　OR 　비교 연산
+```MySQL
+SELECT ename, sal               # 월급이 1000이상인 사람
+FROM emp
+WHERE sal >= 1000;
+
+SELECT ename, deptno            # 부서 번호가 10인 사람
+FROM emp
+WHERE deptno = 10;
+
+SELECT ename, deptno, sal       # 부서 번호가 10이고 월급이 1000이상인 사람
+FROM emp
+WHERE deptno = 10 AND sal >= 1000;
+
+SELECT ename, deptno            # 부서 번호가 10이거나 20인 사람
+FROM emp
+WHERE deptno = 10 OR deptno = 20
+
+SELECT ename, deptno            # 위와 동일. IN이 더 선호됨.
+FROM emp
+WHERE deptno IN(10,20);
+```
+
+### LIKE
+```MySQL
+SELECT ename
+FROM emp
+WHERE ename LIKE 'A%';
+
+SELECT ename
+FROM emp
+WHERE ename LIKE '%T';
+
+SELECT ename
+FROM emp
+WHERE ename LIKE '%L%L%';
+
+SELECT ename
+FROM emp
+WHERE ename LIKE 'A%N';
+
+SELECT ename
+FROM emp
+WHERE ename LIKE '_M%';                 # 이름 두번째 글자가 M인 사람
+```
+
+### ORDER BY
+```MySQL
+SELECT ename FROM emp ORDER BY ename;
+SELECT ename FROM emp ORDER BY ename DESC;
+
+SELECT ename, deptno
+FROM emp                                # 부서번호는 내림차순으로
+ORDER BY deptno DESC, ename;            # 같은 부서에서 이름은 오름차순으로 정렬
+
+SELECT empno, ename, hiredate           # SELECT의 인덱스로 정렬가능.
+ORDER BY 3;                             # 단, 인덱스는 1부터 시작하니까 주의
+```
+
+### IS NULL 　IS NOT NULL
+```MySQL
+SELECT ename, comm
+FROM emp
+WHERE comm IS NOT NULL;             # comm이 null이 아닌 사람들 출력. 300,500,1400,0
+
+SELECT ename, comm
+FROM emp
+WHERE comm IS NULL;                 # comm이 null인 사람들 출력.
+```
+
+### 집계 함수 　sum(), avg(), count(), max(), min(), std()
+```MySQL
+SELECT sum(sal), avg(sal), count(sal), max(sal), min(sal), std(sal)
+FROM emp;
+
+SELECT sum(ename), sum(comm), sum(ifnull(comm,0))   # 문자열은 더할 수 없다.
+FROM emp;                                           # sum은 null을 더하지 않는다.
+
+SELECT avg(ename), avg(comm), avg(ifnull(comm,0))   # avg는 null을 빼고 계산한다.
+FROM emp;                                           # 그래서 null을 0으로 채우면 평균값이 바뀐다
+
+SELECT count(comm), count(ifnull(comm, 0))          # count는 null을 세지 않는다.
+FROM emp;
+
+SELECT max(ename), max(sal), max(comm)              # MySQL은 max(문자열)이 가능하다
+FROM emp;                                           # 다른 SQL은 안 될 수도 있으니 주의
+
+SELECT std(ename), std(comm), std(ifnull(comm,0))   # null은 빼고 표준편차 구한다.
+FROM emp;                                           # 그래서 null을 0으로 채우면 표준편차가 바뀐다.
+
+SELECT avg(sal)                         # 직업이 SALESMAN인 사람의 평균 월급
+FROM emp
+WHERE job = 'SALESMAN';
+
+SELECT avg(sal)                         # 부서가 10번이거나 20번인 사원의 평균 월급
+FROM emp
+WHERE deptno IN (10, 20);
+```
+
+### GROUP BY
+미세 팁) **MySQL 쿼리의 실행 순서**:  
+FROM > JOIN > WHERE > GROUP BY > 집계함수 > SELECT > HAVING > ORDER BY > LIMIT/OFFSET
+```MySQL
+SELECT deptno, avg(sal)                     # 부서별 평균 월급
+FROM emp
+GROUP BY deptno;
+
+SELECT job, max(sal)                        # 직업별 최대 월급
+FROM emp
+GROUP BY job;
+
+SELECT job, deptno, avg(sal)                # 부서 및 직업별로 평균 월급
+FROM emp
+GROUP BY job, deptno
+ORDER BY 3;
+```
+
+### HAVING
+HAVING 연산자는 GROUP BY에 연산되어 나눠진 데이터들을 다시 걸러주기 위해 사용.  
+즉, 제 2의 WHERE 느낌이다.  
+HAVING 다음에는 SELECT에서 사용한 컬럼과 그룹함수를 사용한 컬럼에 대해서만 조건을 줄 수 있다.
+```MySQL
+
+```
+
+### WITH ROLLUP
+
+```MySQL
+
+```
