@@ -125,25 +125,25 @@ distinct 키워드
 
 # 예제를 통한 실전 구문
 my_emp
-| empno | ename  | job       | mgr  | hiredate   | sal     | comm    | deptno | 
+| empno | ename  | job       | mgr  | hiredate   | sal     | comm    | deptno |
 |-------|--------|-----------|------|------------|---------|---------|--------|
-| 7369  | SMITH  | CLERK     | 7902 | 1980-12-17 | 800.00  |         | 20     | 
-| 7499  | ALLEN  | SALESMAN  | 7698 | 1981-02-20 | 1600.00 | 300.00  | 30     | 
-| 7521  | WARD   | SALESMAN  | 7698 | 1981-02-22 | 1250.00 | 500.00  | 30     |  
-| 7566  | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 |         | 20     |   
-| 7654  | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250.00 | 1400.00 | 30     |  
-| 7698  | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850.00 |         | 30     | 
-| 7782  | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 |         | 10     |   
-| 7788  | SCOTT  | ANALYST   | 7566 | 1987-04-19 | 3000.00 |         | 20     | 
-| 7839  | KING   | PRESIDENT |      | 1981-11-17 | 5000.00 |         | 10     | 
+| 7369  | SMITH  | CLERK     | 7902 | 1980-12-17 | 800.00  |         | 20     |
+| 7499  | ALLEN  | SALESMAN  | 7698 | 1981-02-20 | 1600.00 | 300.00  | 30     |
+| 7521  | WARD   | SALESMAN  | 7698 | 1981-02-22 | 1250.00 | 500.00  | 30     |
+| 7566  | JONES  | MANAGER   | 7839 | 1981-04-02 | 2975.00 |         | 20     |
+| 7654  | MARTIN | SALESMAN  | 7698 | 1981-09-28 | 1250.00 | 1400.00 | 30     |
+| 7698  | BLAKE  | MANAGER   | 7839 | 1981-05-01 | 2850.00 |         | 30     |
+| 7782  | CLARK  | MANAGER   | 7839 | 1981-06-09 | 2450.00 |         | 10     |
+| 7788  | SCOTT  | ANALYST   | 7566 | 1987-04-19 | 3000.00 |         | 20     |
+| 7839  | KING   | PRESIDENT |      | 1981-11-17 | 5000.00 |         | 10     |
 | 7844  | TURNER | SALESMAN  | 7698 | 1981-09-08 | 1500.00 | 0.00    | 30     |
-| 7876  | ADAMS  | CLERK     | 7788 | 1987-05-23 | 1100.00 |         | 20     |   
-| 7900  | JAMES  | CLERK     | 7698 | 1981-12-03 | 950.00  |         | 30     |   
-| 7902  | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 |         | 20     |  
-| 7934  | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 |         | 10     |  
+| 7876  | ADAMS  | CLERK     | 7788 | 1987-05-23 | 1100.00 |         | 20     |
+| 7900  | JAMES  | CLERK     | 7698 | 1981-12-03 | 950.00  |         | 30     |
+| 7902  | FORD   | ANALYST   | 7566 | 1981-12-03 | 3000.00 |         | 20     |
+| 7934  | MILLER | CLERK     | 7782 | 1982-01-23 | 1300.00 |         | 10     |
 
 ## Basic
-MySQL에서는 예약어만 대문자로 표기하고 SQL 함수를 포함한 나머지는 소문자로 쓰는게 관례다
+MySQL에서는 예약어(Keyword)만 대문자로 표기하고 나머지는 소문자로 쓰는게 관례다
 
 ### USE　SELECT　FROM　DESC　SHOW TABLES
 ```MySQL
@@ -178,16 +178,16 @@ SELECT ename, sal*12 AS 연봉 FROM emp;
 SELECT ename, sal, comm, sal + comm AS 급여      # comm에 null이 있어서
 FROM emp;                                       # 연산결과인 급여에도 null이 생김
 
-SELECT ename, sal, comm, sal + ifnull(comm,0) AS 급여  # comm의 null을 0으로 처리함
+SELECT ename, sal, comm, sal + IFNULL(comm,0) AS 급여  # comm의 null을 0으로 처리함
 FROM emp;
 
-SELECT ename, ifnull(comm, "없음") AS 커미션        # 숫자외에도 가능
+SELECT ename, IFNULL(comm, "없음") AS 커미션        # 숫자외에도 가능
 FROM emp; 
 
-SELECT ename, sal, comm, ifnull(comm, sal) AS 커미션없으면급여   # 다른 필드로 대체 가능
+SELECT ename, sal, comm, IFNULL(comm, sal) AS 커미션없으면급여   # 다른 필드로 대체 가능
 FROM emp;
 
-SELECT ename, sal, comm, sal * 0.85 + ifnull(comm, 0) AS 실수령액    # 종합
+SELECT ename, sal, comm, sal * 0.85 + IFNULL(comm, 0) AS 실수령액    # 종합
 FROM emp;
 ```
 
@@ -238,6 +238,7 @@ WHERE ename LIKE '_M%';                 # 이름 두번째 글자가 M인 사람
 ```
 
 ### ORDER BY
+SELECT 절의 목록 중 하나 혹은 여럿을 기준으로 결과 집합을 정렬한다.
 ```MySQL
 SELECT ename FROM emp ORDER BY ename;
 SELECT ename FROM emp ORDER BY ename DESC;
@@ -261,48 +262,51 @@ FROM emp
 WHERE comm IS NULL;                 # comm이 null인 사람들 출력.
 ```
 
-### 집계 함수 　sum(), avg(), count(), max(), min(), std()
+### 집계 함수 　SUM(), AVG(), COUNT(), MAX(), MIN(), STD()
 ```MySQL
-SELECT sum(sal), avg(sal), count(sal), max(sal), min(sal), std(sal)
+SELECT SUM(sal), AVG(sal), COUNT(sal), MAX(sal), MIN(sal), STD(sal)
 FROM emp;
 
-SELECT sum(ename), sum(comm), sum(ifnull(comm,0))   # 문자열은 더할 수 없다.
-FROM emp;                                           # sum은 null을 더하지 않는다.
+SELECT SUM(ename), SUM(comm), SUM(IFNULL(comm,0))   # 문자열은 더할 수 없다.
+FROM emp;                                           # SUM은 null을 더하지 않는다.
 
-SELECT avg(ename), avg(comm), avg(ifnull(comm,0))   # avg는 null을 빼고 계산한다.
+SELECT AVG(ename), AVG(comm), AVG(IFNULL(comm,0))   # avg는 null을 빼고 계산한다.
 FROM emp;                                           # 그래서 null을 0으로 채우면 평균값이 바뀐다
 
-SELECT count(comm), count(ifnull(comm, 0))          # count는 null을 세지 않는다.
+SELECT COUNT(comm), COUNT(IFNULL(comm, 0))          # COUNT는 null을 세지 않는다.
 FROM emp;
 
-SELECT max(ename), max(sal), max(comm)              # MySQL은 max(문자열)이 가능하다
+SELECT MAX(ename), MAX(sal), MAX(comm)              # MySQL은 MAX(문자열)이 가능하다
 FROM emp;                                           # 다른 SQL은 안 될 수도 있으니 주의
 
-SELECT std(ename), std(comm), std(ifnull(comm,0))   # null은 빼고 표준편차 구한다.
+SELECT STD(ename), STD(comm), STD(IFNULL(comm,0))   # null은 빼고 표준편차 구한다.
 FROM emp;                                           # 그래서 null을 0으로 채우면 표준편차가 바뀐다.
 
-SELECT avg(sal)                         # 직업이 SALESMAN인 사람의 평균 월급
+SELECT AVG(sal)                         # 직업이 SALESMAN인 사람의 평균 월급
 FROM emp
 WHERE job = 'SALESMAN';
 
-SELECT avg(sal)                         # 부서가 10번이거나 20번인 사원의 평균 월급
+SELECT AVG(sal)                         # 부서가 10번이거나 20번인 사원의 평균 월급
 FROM emp
 WHERE deptno IN (10, 20);
 ```
 
 ### GROUP BY
+GROUP BY를 쓰면 SELECT절에 GROUP BY로 그룹된 필드보다 더 큰 필드, 혹은 다른 필드는 올 수 없다.  
+GROUP BY는 SELECT 절에서 지정한 열 또는 표현식에 따라 결과 집합을 그룹화하는 데 사용됩니다. GROUP BY로 그룹화된 필드 외에 다른 필드는 SELECT 절에 나열될 때 집계 함수를 사용해야 하며, 집계 함수를 사용하지 않는 필드는 GROUP BY 절에 포함되어야 합니다.  
+
 미세 팁) **MySQL 쿼리의 실행 순서**:  
 FROM > JOIN > WHERE > GROUP BY > 집계함수 > SELECT > HAVING > ORDER BY > LIMIT/OFFSET
 ```MySQL
-SELECT deptno, avg(sal)                     # 부서별 평균 월급
+SELECT deptno, AVG(sal)                     # 부서별 평균 월급
 FROM emp
 GROUP BY deptno;
 
-SELECT job, max(sal)                        # 직업별 최대 월급
+SELECT job, MAX(sal)                        # 직업별 최대 월급
 FROM emp
 GROUP BY job;
 
-SELECT job, deptno, avg(sal)                # 부서 및 직업별로 평균 월급
+SELECT job, deptno, AVG(sal)                # 부서 및 직업별로 평균 월급
 FROM emp
 GROUP BY job, deptno
 ORDER BY 3;
@@ -313,11 +317,100 @@ HAVING 연산자는 GROUP BY에 연산되어 나눠진 데이터들을 다시 �
 즉, 제 2의 WHERE 느낌이다.  
 HAVING 다음에는 SELECT에서 사용한 컬럼과 그룹함수를 사용한 컬럼에 대해서만 조건을 줄 수 있다.
 ```MySQL
+SELECT job, SUM(sal)    # job으로 그룹한 결과 중 5000이상만 보고 싶음. 
+FROM emp                # 하지만 여기서 WHERE를 쓰면 오류난다.
+WHERE 2 >= 5000      # 그룹된 애들에 조건을 주는건 WHERE로 안되고 HAVING을 써야한다.
+GROUP BY job;
 
+SELECT job, SUM(sal)
+FROM emp
+GROUP BY job
+HAVING SUM(sal) >= 5000;            # 정답
+
+SELECT deptno, AVG(sal)         # HAVING 조건이 SELECT와 같을 필요는 없다.
+FROM emp                        # 부서내의 사원들의 월급합이 10000이상인 부서들의
+GROUP BY deptno                 # 평균 월급이 궁금할 때, 이렇게 크로스해서 가능하다.
+HAVING SUM(sal) >= 10000;
 ```
 
 ### WITH ROLLUP
+그룹의 총계, 부분 소계.  
+ROLLUP 연산자는 GROUP BY문과 WITH와 함께 사용해야함.  
+```MySQL
+SELECT deptno, SUM(sal)
+FROM emp
+GROUP BY deptno WITH ROLLUP;        # 부서별 월급합과 소계
+
+SELECT deptno, empno, SUM(sal)      # 부서별 사원 개개인의 월급과 소계를 같이 출력.
+FROM emp                                # ename 사원 이름은 출력할 수 없다.(오류)
+GROUP BY deptno, empno WITH ROLLUP;     # 이는 나중에 따로 가져와야 함.
+
+SELECT deptno, job, SUM(sal)
+FROM emp
+GROUP BY deptno, job WITH ROLLUP;       # 부서별로 나누고 직업별로 월급합을 출력
+
+SELECT deptno, job, AVG(sal)            # 부서별로 직업별로 평균월급을 소계하고
+FROM emp                                # 그 소계를 모아 총계를 구한다.
+GROUP BY deptno, job WITH ROLLUP;       # 총계를 소계로 구하지 않기 때문에 꽤 쓸만함
+```
+
+### GROUPING()
+GROUPING 함수는 GROUP BY와 함께 WITH ROLLUP 또는 WITH CUBE(MySQL은 없음)를 사용하여 그룹화된 결과에서 소계(Row Total)를 식별하는 데 사용되는 MySQL의 확장 함수다.  
+그룹화된 열의 합계 레벨을 확인하여 0 또는 1의 값을 반환한다.  
+```MySQL
+SELECT job, SUM(sal), GROUPING(job)
+FROM emp
+GROUP BY job WITH ROLLUP;
+
+SELECT deptno, job, AVG(sal), GROUPING(deptno), GROUPING(job)
+FROM emp
+GROUP BY deptno, job WITH ROLLUP;
+
+SELECT job, ename, SUM(sal), GROUPING(job), GROUPING(ename)
+FROM emp
+GROUP BY job, ename WITH ROLLUP
+ORDER BY 2;
+```
+
+### WITH CUBE
+일단 MySQL 기본 쿼리문에 WITH CUBE는 없다. 다차원 집계를 수행할 때 사용되므로, 확장된 GROUP BY 기능 중 하나입니다. 
 
 ```MySQL
+SELECT deptno, job, ename, SUM(sal)
+FROM emp
+GROUP BY deptno, job, ename WITH CUBE;
 
+SELECT deptno, job, ename, SUM(sal)
+FROM emp
+GROUP BY cube(deptno, job, ename);
+
+-- ---------- MySQL에서 유사 CUBE 구현하기-----------------
+
+SELECT deptno, job, ename, SUM(sal), COUNT(sal)         
+FROM emp                                    # 첫번째 그룹화: deptno, job, ename
+GROUP BY deptno, job, ename 
+
+UNION
+
+SELECT deptno, job, NULL AS ename, SUM(sal), COUNT(sal)     
+FROM emp                                    # 두 번째 그룹화: deptno, job
+GROUP BY deptno, job
+
+UNION
+
+SELECT deptno, NULL AS job, ename, SUM(sal), COUNT(sal)     
+FROM emp                                    # 세 번째 그룹화: deptno, ename
+GROUP BY deptno, ename
+
+UNION
+
+SELECT deptno, NULL AS job, NULL AS ename, SUM(sal), COUNT(sal)     
+FROM emp                                    # 네 번째 그룹화: deptno
+GROUP BY deptno;
+
+-- ---------- CUBE 구현 결과-----------------
 ```
+![sql_cube](etc/sql_cube.png)
+
+
+
