@@ -262,7 +262,7 @@ FROM emp
 WHERE comm IS NULL;                 # comm이 null인 사람들 출력.
 ```
 
-### 집계 함수 　SUM(), AVG(), COUNT(), MAX(), MIN(), STD()
+### 집계 함수 　SUM(), AVG(), COUNT(), MAX(), MIN(), STD(), VARIANCE()
 ```MySQL
 SELECT SUM(sal), AVG(sal), COUNT(sal), MAX(sal), MIN(sal), STD(sal)
 FROM emp;
@@ -281,6 +281,11 @@ FROM emp;                                           # 다른 SQL은 안 될 수�
 
 SELECT STD(ename), STD(comm), STD(IFNULL(comm,0))   # null은 빼고 표준편차 구한다.
 FROM emp;                                           # 그래서 null을 0으로 채우면 표준편차가 바뀐다.
+
+SELECT VARIANCE(sal), VAR_POP(sal),             # 분산
+       STD(sal), STDDEV(sal)                    # 표준편차
+       VAR_SAMP(sal)                            # 표본분산
+FROM emp;
 
 SELECT AVG(sal)                         # 직업이 SALESMAN인 사람의 평균 월급
 FROM emp

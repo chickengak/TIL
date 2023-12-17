@@ -1,3 +1,45 @@
+### EXPLAIN
+EXPLAIN은 MySQL에서 사용되는 키워드로, SQL 쿼리의 실행 계획을 분석하여 쿼리의 성능을 평가하거나 최적화 하는데 도움을 주는 명령입니다. EXPLAIN을 사용하면 MySQL 쿼리 옵티마이저가 쿼리를 실행하기 위해 어떤 방식으로 데이터에 접근하고 어떤 인덱스를 사용하는지에 대한 정보를 제공합니다.  
+
+EXPLAIN의 필드
+1. id: EXPLAIN 결과에서 각 테이블 액세스 또는 서브쿼리에 대한 고유한 식별자입니다. 여러 테이블이나 서브쿼리가 있는 쿼리에서는 여러 개의 id가 나타날 수 있습니다.
+
+2. select_type: 쿼리 내에서 어떤 종류의 SELECT 작업을 수행하는지를 나타냅니다.
+    - SIMPLE: 단순한 SELECT 쿼리.
+    - PRIMARY: 주 쿼리 또는 서브쿼리의 바깥 부분.
+    - SUBQUERY: 서브쿼리.
+    - DERIVED: FROM 절에서 파생된 테이블.
+    - 등등...
+3. table: 조회 중인 테이블의 이름입니다.
+
+4. partitions: 테이블 파티션 정보입니다.
+
+5. type: 테이블에서 레코드를 검색하는 방법을 나타냅니다. 다양한 값이 사용되며, 일반적인 값으로는 다음이 있습니다.
+    - ALL: 테이블의 모든 레코드를 스캔.
+    - index: 인덱스를 사용하여 레코드를 스캔.
+    - range: 범위 스캔.
+    - ref: 참조 스캔.
+    - 등등...
+6. possible_keys: 쿼리 옵티마이저에서 고려한 인덱스 목록입니다.
+
+7. key: 실제로 사용된 인덱스입니다.
+
+8. key_len: 사용된 인덱스의 길이입니다.
+
+9. ref: 인덱스를 참조할 때 사용하는 값 또는 표현식입니다.
+
+10. rows: 검색 조건에 의해 반환된 레코드 수입니다.
+
+11. filtered: 행 필터링 비율을 나타냅니다.
+
+12. Extra: 추가 정보입니다. 이 필드에는 쿼리 실행에 관련된 다양한 정보가 포함될 수 있습니다.  
+
+EXPLAIN을 사용하여 쿼리 실행 계획을 분석하면 쿼리의 성능을 최적화하고 인덱스를 적절하게 활용하는 데 도움이 됩니다. 쿼리의 성능 문제를 식별하고 개선하기 위해 이 정보를 활용할 수 있습니다.
+
+<br>
+<br>
+<br>
+
 # 예제를 통한 실전 구문
 my_emp
 | empno | ename  | job       | mgr  | hiredate   | sal     | comm    | deptno |
@@ -28,7 +70,7 @@ OVER()는 윈도우 함수(창 함수)의 일부로 사용되며, 특히 데이�
 　　　ORDER BY <정렬 열>  
 　　　ROWS <범위 또는 행> BETWEEN <시작 행> AND <끝 행>  
 )  
-+$a$) ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING은 현재 행의 이전 행과 다음 행을 포함한 3개의 연속된 행을 창으로 정의
+$＋a$ ) ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING은 현재 행의 이전 행과 다음 행을 포함한 3개의 연속된 행을 창으로 정의
 ```MySQL
 SELECT SUM(sal)
 FROM emp;
@@ -38,11 +80,32 @@ FROM emp;
 
 SELECT SUM(sal) OVER(ORDER BY sal), sal
 FROM emp;
+-- 누적합계 측정 가능. 단, sal에 동일값이 있으면, 랭킹때 같은 값은 등수가 같은 느낌처럼 같이 더해버린다. ex) 1250이 두 명일 때, 누적합에 1250 더하고 1250 더하는게 아니라 2500 더하고 0더한 결과를 출력한다.
 
 SELECT SUM(sal) OVER (ORDER BY sal ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
        AS cumulative_sum, sal
 FROM emp;
+-- 이렇게 작성해야 동일값도 따로 누적합 한다.
 ```
+
+### PARTITION BY
+GROUP BY와 비슷한 느낌때문에 헷갈릴 수 있다.  
+> - GROUP BY는 주로 집계 함수와 함께 사용되며, 특정 열 또는 열의 조합으로 데이터를 그룹화 한다.  
+> - 그래서 주로 데이터를 요약하거나 집계된 정보가 필요할 때 사용한다.
+
+> - PARTITION BY는 윈도우 함수(창 함수)와 함께 사용되며, 결과 집합의 행을 파티션으로 나눌 때 사용된다.
+> - 그래서 각 파티션 내에서 윈도우 함수가 계산되며, 파티션 간에는 결과가 분리됩니다.
+> - 주로 현재 행 주변의 행에 대한 계산을 수행하거나, 결과 집합을 특정 범위 또는 조건에 따라 분할할 때 사용한다. ex) 재무 통계, 시계열 등등..
+
+```MySQL
+SELECT deptno, SUM(sal) OVER( PARTITION BY deptno), sal
+FROM emp;
+
+SELECT job, SUM(sal) OVER( PARTITION BY job), sal
+FROM emp;
+-- ----------결과물로 GROUP BY와 PARTITION BY를 비교하자 -----------------------
+```
+![groupby_partitionby](etc/groupby_partitionby.png)
 
 ### ROW_NUMBER()
 SELECT ROW_NUMBER() [OVER  PARTITION BY, ORDER BY ]	
@@ -76,8 +139,208 @@ SELECT RANK() OVER(PARTITION BY deptno ORDER BY sal DESC) AS 'rank',
 FROM emp;                       # 부서내에서 월급순으로 랭킹 매기기
 ```
 
+### YEAR()　MONTH()　DAY()　DAYOFWEEK()
+https://dev.mysql.com/doc/refman/8.0/en/expressions.html  
+https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_date-add
+```
+SELECT STR_TO_DATE('2-4-1981','%d-%m-%y');      # 1981-04-02
+SELECT STR_TO_DATE('2-4-1981','%D-%M-%Y')       # null
 
-날짜 string 그룹컨캣 regexp 비트연산 
+SELECT ename, hiredate 　FROM emp 　WHERE hiredate >= '1981-05-01';
+SELECT ename, hiredate 　FROM emp 　WHERE hiredate >= '1981/05/01';
+SELECT ename, hiredate 　FROM emp 　WHERE hiredate >= '81/05/01';
 
+SELECT YEAR(hiredate), MONTH(hiredate), DAY(hiredate)　FROM emp;
+
+SELECT HOUR(NOW()), MINUTE(NOW()), SECOND(NOW()), MICROSECOND(NOW());
+
+SELECT EXTRACT(YEAR FROM '2019-07-02'),                     # 2019
+       EXTRACT(YEAR_MONTH FROM '2019-07-02 01:02:03');      # 201907
+
+SELECT DATE_FORMAT('2019-07-02 14:15:16', '%Y/%M/%D/%W %H/%i/%S');
+                                    # 2019/July/2nd/Tuesday 14/15/16
+SELECT DATE_FORMAT('2019-07-02 14:15:16', '%y/%m/%d/%w %h/%i/%s');
+                                        # 19/07/02/2 02/15/16
+SELECT DATE_FORMAT('2019-07-02 14:15:16', '%Y-%b-%d-%a %T');
+                                        # 2019-Jul-02-Tue 14:15:16
+
+
+SELECT DATE_ADD('2018-05-01', INTERVAL 1 DAY),      # 2018-05-02
+    DATE_SUB('2018-05-01', INTERVAL 5 MONTH),       # 2017-12-01
+    DATE_ADD('2018-05-01', INTERVAL 1 SECOND),      # 2018-05-01 00:00:01
+    DATE_ADD('2018-05-01', INTERVAL 1 QUARTER),     # 2018-08-01
+    DATE_ADD('2100-12-31 23:59:59', INTERVAL '1:1' MINUTE_SECOND),   # 2101-01-01 00:01:00
+    DATE_ADD('2025-01-01 00:00:00', INTERVAL '1:1:1:1' DAY_SECOND),  # 2025-01-02 01:01:01
+    DATE_ADD('2025-01-01 00:00:00', INTERVAL '1 1 0 1' DAY_SECOND),  # 2025-01-02 01:00:01
+    DATE_ADD('1900-01-01 00:00:00', INTERVAL '-1 10' DAY_HOUR);      # 2025-01-02 01:00:01
+
+
+SELECT WEEKDAY(hiredate), DAYOFWEEK(hiredate) FROM emp;
+-- WEEKDAY()는 월~일 을 0~6으로 표시함.
+-- DAYOFWEEK()는 일~토 을 1~7으로 표시함.   달력기준으로 1,2,...,7 하면되니까 이걸 기억하자
+
+SELECT ename, hiredate,
+    CASE DAYOFWEEK(hiredate)                # 요일을 일월화...토로 출력하고 싶다면
+		WHEN 1 THEN "일"
+		WHEN 2 THEN "월"
+		WHEN 3 THEN "화"
+		WHEN 4 THEN "수"
+		WHEN 5 THEN "목"
+		WHEN 6 THEN "금"
+		WHEN 7 THEN "토"
+    END AS "입사요일"
+FROM emp;
+
+
+SELECT deptno, AVG(timestampdiff(YEAR, hiredate, NOW()))
+FROM emp                                    # 오늘기준으로 각 부서별 재직기간을 출력.
+GROUP BY deptno                             # 단, 직원이 있는 부서만.
+HAVING COUNT(empno) > 0;
+
+SELECT timestampdiff(DAY, hiredate, NOW())
+FROM emp;
+```
+
+### 별칭 사용, 중복 연산　
+```MySQL
+SELECT YEAR(hiredate) AS 입사년도, COUNT(*) AS "년도별 입사한 수"
+FROM emp
+GROUP BY 입사년도;                              # GROUP BY 컬럼 별칭 사용 가능.
+
+SELECT YEAR(hiredate) AS "입사 년도", COUNT(*) AS "년도별 입사한 수"
+FROM emp
+GROUP BY 1;             # GROUP BY 컬럼 별칭이 "" '' 면 선택할 수 없기 때문에 인덱싱 하면됨.
+
+SELECT YEAR(hiredate) AS "입사 년도", COUNT(*) AS "년도별 입사한 수"
+FROM emp
+GROUP BY YEAR(hiredate);
+-- 이렇게 해도 중복연산하지 않는다. SQL엔진이 최적화하고 불필요한 중복계산을 하지 않기 때문. 원리는 DBMS는 표현식을 한번 계산한 다음 결과를 두 곳에서 모두 사용하게 할 수 있기 때문.
+```
+
+### GROUP_CONCAT()
+GROUP_CONCAT([DISTINCT] expr [,expr ...]  
+　　　　　　　[ORDER BY {unsigned_integer | col_name | expr} [ASC | DESC] [,col_name ...]]  
+　　　　　　　[SEPARATOR str_val])  
+```MySQL
+SELECT deptno, GROUP_CONCAT(DISTINCT job ORDER BY(job) SEPARATOR ', ')
+FROM emp
+GROUP BY deptno;                # 각 부서별 직업 목록을 문자열로 합쳐서 출력.
+
+SELECT YEAR(hiredate), GROUP_CONCAT(ename ORDER BY(ename) SEPARATOR ', ')
+FROM emp
+GROUP BY YEAR(hiredate);            # 입사년도별 직원이름을 ,로 나열하기.
+
+SELECT YEAR(hiredate),
+       GROUP_CONCAT(DATE_FORMAT(hiredate, '%m-%d') ORDER BY hiredate SEPARATOR ', ')
+FROM emp
+GROUP BY YEAR(hiredate);            # 입사년도별 입사월일을 ,로 나열해 문자열로 출력
+```
+
+### CONCAT()　SUBSTR()
+```MySQL
+SELECT empno, CONCAT(ename, " - ", job)
+FROM emp;                                               # '이름 - 직업'으로 출력
+
+SELECT CONCAT_WS(' - ', empno, ename, sal, comm)     # 7369 - SMITH - 800.00
+FROM emp;                                            # 7499 - ALLEN - 1600.00 - 300.00
+
+SELECT SUBSTR(job, 1, 3), job
+FROM emp                                                # 직업을 첫 세글자로 요약하기
+GROUP BY job;
+
+SELECT SUBSTRING(job, 1, 3), job
+FROM emp
+GROUP BY job;
+
+SELECT RPAD(job, 3, ' '), job
+FROM emp
+GROUP BY job;
+
+
+SELECT CONCAT(UPPER(SUBSTR(ename, 1, 1)), LOWER(SUBSTR(ename,2)))
+FROM emp;                                                   # 이름 첫 글자만 대문자
+
+SELECT ename, LENGTH(ename), REVERSE(ename)
+FROM emp                                 # 이름을 두번째 글자 순으로 정렬하고
+ORDER BY SUBSTR(ename, 2, 2);            # 글자수와 거꾸로 뒤집어 출력
+
+
+SELECT ename, REVERSE(ename)
+```
+
+### REGEXP()
+Regular Expression 　/ 테스트 가능한 곳 https://regexr.com/  
+이메일 패턴, 전화번호 패턴, 우편번호 패턴, 주민번호, 운전면허, 여권패턴, 계좌 번호 패턴, url 패턴 등등... 많은곳에 쓰인다.
+```MySQL
+SHOW VARIABLES LIKE 'regexp_stack_limit';   # 스택 메모리 제한
+SHOW VARIABLES LIKE 'regexp_time_limit';    # 시간 제한
+
+SELECT ename  FROM emp  WHERE ename REGEXP '^J';
+SELECT ename  FROM emp  WHERE ename REGEXP 'ER$';
+SELECT ename  FROM emp  WHERE ename REGEXP 'MI';                # SMITH MILLER
+SELECT ename  FROM emp  WHERE ename REGEXP 'M[A-Z]*I';          # SMITH MILLER MARTIN
+SELECT ename  FROM emp  WHERE ename REGEXP '^.[A]';
+SELECT ename  FROM emp  WHERE ename REGEXP '^..[A]';
+SELECT ename  FROM emp  WHERE ename REGEXP 'JO(HN|NE)';
+SELECT ename  FROM emp  WHERE ename REGEXP '^.{5}$';
+SELECT ename  FROM emp  WHERE ename REGEXP '^J[A-Z]*S$';
+SELECT *      FROM emp  WHERE job REGEXP '^[A-Z]+N$';
+SELECT *      FROM emp  WHERE REGEXP_LIKE(job, '^[A-Z]+N$');
+
+-- 정규표현에서 + 와 *의 차이
+-- a+    a, aa, aaa, ...
+-- a*    '', a, aa, aaa, ...
+```
+
+### REGEXP_INSTR()　REGEXP_SUBSTR()
+REGEXP_INSTR(expr, pat[, pos[, occurrence[, return_option[, match_type]]]])  
+REGEXP_INSTR(검색할 문자열, 패턴, 시작위치, 일치항목, 반환 옵션, 유형 옵션])
+```MySQL
+SELECT REGEXP_INSTR('Hello, World!', 'o');                      # 5
+SELECT REGEXP_INSTR('Hello, World!', 'o', 1, 2);                # 9
+SELECT REGEXP_INSTR('Hello, World!', 'W', 1, 1, 0, 'c');        # 8
+
+SELECT REGEXP_SUBSTR('abc def ghi', '[a-z]+');                  # abc
+SELECT REGEXP_SUBSTR('abc def ghi', '[a-z]+', 1, 3);            # ghi
+```
+
+### LOAD_FILE()
+```MySQL
+SHOW VARIABLES LIKE 'secure_file_priv';     # 경로 확인  \\ 이거나 / 로 경로 구분
+SHOW VARIABLES LIKE 'max_allowed_packet';   # 파일 크기 제한
+
+SELECT load_file("C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\i13943298414.png");
+SELECT load_file("C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\test.txt");
+
+
+-- 텍스트 파일
+DROP TABLE my_file;
+CREATE TABLE my_file(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    file_content LONGTEXT
+);
+
+INSERT INTO my_file(file_content)
+ VALUES(load_file("C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\test.txt"));
+
+SELECT * FROM my_file;
+
+
+-- 이미지 파일
+DROP TABLE my_image;
+CREATE TABLE my_image(
+	id INT AUTO_INCREMENT PRIMARY KEY,
+    file_content LONGBLOB
+);
+
+INSERT INTO my_image(file_content)
+ VALUES(load_file("C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\i13943298414.png"));
+
+INSERT INTO my_file(file_content)
+ VALUES(load_file("C:\\ProgramData\\MySQL\\MySQL Server 8.0\\Uploads\\test.txt"));
+ -- BLOB는 Binary Large Object이기 때문에 이미지가 아닌 파일도 이진으로 저장 가능
+
+ SELECT * FROM my_image;
+```
 
 
