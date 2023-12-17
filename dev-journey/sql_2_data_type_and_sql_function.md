@@ -143,6 +143,11 @@ FROM emp;                       # 부서내에서 월급순으로 랭킹 매기�
 https://dev.mysql.com/doc/refman/8.0/en/expressions.html  
 https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_date-add
 ```
+SELECT DATE '2012-12-31', DATE '2012/12/31', DATE '2012^12^31', DATE '2012@12@31';
+-- '2012-12-31' 형태가 권장
+SELECT TIMESTAMP'2012-12-31 11:30:45', TIMESTAMP'2012-12-31-11-30-45', TIMESTAMP'2012^12^31 11*30*45';
+-- '2012-12-31 11:30:45' 형태가 권장
+
 SELECT STR_TO_DATE('2-4-1981','%d-%m-%y');      # 1981-04-02
 SELECT STR_TO_DATE('2-4-1981','%D-%M-%Y')       # null
 
@@ -215,6 +220,22 @@ SELECT YEAR(hiredate) AS "입사 년도", COUNT(*) AS "년도별 입사한 수"
 FROM emp
 GROUP BY YEAR(hiredate);
 -- 이렇게 해도 중복연산하지 않는다. SQL엔진이 최적화하고 불필요한 중복계산을 하지 않기 때문. 원리는 DBMS는 표현식을 한번 계산한 다음 결과를 두 곳에서 모두 사용하게 할 수 있기 때문.
+```
+
+### HEX()　UNHEX()
+데이터를 16진법으로 바꾸고 다시 16진법을 텍스트로 바꾸기. 데이터 압축효과가 있다.
+```MySQL
+SELECT HEX('cat');                  # 16진법으로
+SELECT X'636174';                   # BLOB로 출력됨
+SELECT BIN(X'636174');              # 11000110110000101110100
+SELECT CAST(UNHEX('636174') AS CHAR);       # 16진법을 다시 문자로
+```
+
+### CHAR_LENGTH()　LENGTH()
+```MySQL
+SELECT LENGTH('text'), LENGTH('한글네자'),                      # 4  12
+       CHAR_LENGTH('text'), CHAR_LENGTH('한글네자');            # 4  4
+-- LENGTH()는 바이트 기준.
 ```
 
 ### GROUP_CONCAT()
@@ -343,4 +364,25 @@ INSERT INTO my_file(file_content)
  SELECT * FROM my_image;
 ```
 
+### MAKE_SET()　ASCII()　STRCMP()　WEIGHT_STRING()
+```MySQL
+SELECT MAKE_SET(3, 'hello', 'nice', NULL, 'world'),             # hello,nice
+       MAKE_SET(1 | 4, 'hello', 'nice', NULL, 'world'),         # hello
+       MAKE_SET(1 | 8, 'hello', 'nice', NULL, 'world'),         # hello,world
+       MAKE_SET(11 & 15, 'hello', 'nice', NULL, 'world');       # hello,nice,world
+-- 비트 연산 TRUE인 곳 리턴
 
+SELECT ASCII('A'), ASCII('C'), ASCII('Z');
+
+SELECT STRCMP('A', 'C');    # 65 < 67 -1
+SELECT STRCMP('Z', 'A');    # 90 > 65  1
+SELECT STRCMP('A', 'A');    # 65 = 66  0
+SELECT STRCMP('AA', 'A');   #          1
+-- string 비교연산과 같다. 앞이 크면 1 앞이 작으면 -1 같으면 0.
+
+SELECT WEIGHT_STRING('hello');
+SELECT ename, HEX(WEIGHT_STRING(ename))
+FROM emp
+ORDER BY WEIGHT_STRING(ename);
+-- 문자열을 정렬하거나 서로 비교할 때 내부적으로 사용되는 "가중치 문자열"을 출력함. 이 가중치는 해당 문자열이 정렬이나 비교를 위해 어떻게 해석되는지를 나타냅니다. 일반적으로 쓰이진 않고 주로 MySQL의 내부 동작을 이해하거나 특정 최적화를 수행할 때 사용됩니다.
+```
