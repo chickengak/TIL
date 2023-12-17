@@ -229,6 +229,9 @@ SELECT HEX('cat');                  # 16진법으로
 SELECT X'636174';                   # BLOB로 출력됨
 SELECT BIN(X'636174');              # 11000110110000101110100
 SELECT CAST(UNHEX('636174') AS CHAR);       # 16진법을 다시 문자로
+
+SELECT b'11111111'+0, BIN(b'11111111'), OCT(b'11111111'), HEX(b'11111111');
+-- 255  11111111  377  FF
 ```
 
 ### CHAR_LENGTH()　LENGTH()
