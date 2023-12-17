@@ -3,7 +3,7 @@ def solution(cacheSize, cities):
     cache = []
     if cacheSize == 0:
         return len(cities)*5
-    
+
     for c in cities:
         city = c.lower()
         try:
