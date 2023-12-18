@@ -38,4 +38,23 @@ Structured Data와 Unstructured Data 사이의 데이터로 완전히 체계화�
 
 <br>
 
-## Data Warehouses vs. Data Lakes
+## Data Warehouses vs. Data Lakes vs. Data Lakehouse
+
+<br>
+
+## Delta Mesh
+
+<br>
+
+## ETL Pipelines
+
+<br>
+
+## Data Sources
+
+<br>
+
+## A very (intentionally) Incomplete Overview of Data Modeling
+
+<br>
+
