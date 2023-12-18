@@ -28,23 +28,23 @@ mysql -u root -p -h localhost
 
 무결성 제약 조건.
 
-![Alt text](image.png)
+![Alt text](etc/image.png)
 
 
 색인을 걸면 이진트리로 빠르게 찾아준다.
 
-![Alt text](image-1.png)
+![Alt text](etc/image-1.png)
 
 
 테이블은 크게 두 가지 관계로 나눌 수 있다.  
 강한주종관계  
 약한주종관계  
-![Alt text](image-2.png)
+![Alt text](etc/image-2.png)
 
 어떤 테이블에서 CRUD할 때 다른테이블도 동시에 혹은 전후로 CRUD를 하는걸 트리거 Triggers라고 한다.  
 after, berfor, new등의 표시가 있다.
 
-![Alt text](image-3.png)
+![Alt text](etc/image-3.png)
 
 Foreign keys 참조 키.
 
@@ -53,7 +53,7 @@ Grants 권한.
 %가 administrator임.
 
 Entity
-![Alt text](image-4.png)
+![Alt text](etc/image-4.png)
 
 회사부서와 회사원 테이블을 다루면 회사부서가 주가되고 회사원은 종이된다.  
 그리고 하나의 부서에는 여러 회사원이 있을 수 있으니까, 1:many로 표현할 수 있다.  
@@ -85,7 +85,7 @@ SELECT @v1, @v2, @v3;
 워크벤치와 쉘에서 값이 다를 때가 있다.  
 진법 데이터를 10진법으로 표기하고 싶을 때는 관습적으로 +0을 붙여주는게 필요하다.  
 허나 SELECT에 +0을 하는 경우는 보안 문제도 있고 뭐 그래서 mysql에서 간단히 볼때만 쓰고 보통은 쓰지말라는데 뭐 설명을 대충하다 마냐. CAST함수를 쓰라신다
-![Alt text](image-5.png)
+![Alt text](etc/image-5.png)
 
 
 문자 인코딩에 greek, hebrew가 없으면 곤란해질 경우가 생길 수 있다.
