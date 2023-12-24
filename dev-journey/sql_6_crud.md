@@ -137,9 +137,96 @@ DELETE FROM my_emp
 WHERE empno = 2345 AND mgr = 7784;
 ```
 
-**Q 2-1.** 홍길동의  봉급을 KING과 같이 바꾸자.
+**Q 2-2.** 홍길동의 봉급을 KING과 같이 바꾸자.
 ```sql
-
+UPDATE my_emp
+SET sal =(
+    SELECT temp.sal
+    FROM (
+        SELECT sal
+        FROM my_emp
+        WHERE ename = 'KING'
+    ) temp
+)
+WHERE ename = '홍길동';
 ```
 
-**Q 2-2.**  홍길동의 매니저가 7785인 사원의 봉급을  0으로 바꾸자.  
+<br>
+
+**Q 3.**  WARD 와 같은 직업을 가진 삭제.
+```sql
+DELETE FROM my_emp
+WHERE job = (
+    SELECT temp.job
+    FROM (
+        SELECT job
+        FROM my_emp
+        WHERE ename = 'WARD'
+    ) temp
+);
+```
+
+**Q 4-1.**  WARD의 월급을 SMITH의 월급과 같게 수정하자
+```sql
+```
+
+**Q 4-2.**  'KING'의 직업을 'SMITH'와 같게 바꿔라
+```sql
+```
+
+**Q 4-3.**  사원번호가 7499번인 사원과 같은 직업을 가진 사원들의 입사일을 오늘 날짜로 변경.
+```sql
+UPDATE my_emp
+SET hiredate = CURDATE()
+WHERE job = (
+    SELECT temp.job
+    FROM (
+        SELECT job
+        FROM my_emp
+        WHERE empno = 7499
+    ) temp
+);
+```
+
+
+**Q 5-1.** 제약조건 추가해보기
+```sql
+ALTER TABLE my_emp ADD CONSTRAINT PRIMARY KEY (empno);
+ALTER TABLE my_dept ADD CONSTRAINT PRIMARY KEY (deptno);
+
+ALTER TABLE my_emp ADD CONSTRAINT myfk_emp_dpet FOREIGN KEY (deptno) REFERENCES my_dept(deptno) ON DELETE CASCADE ON UPDATE CASCADE;
+-- 제약조건 이름은 다른 테이블이더라도 디비기준으로 중복될 수 없다.
+```
+
+**Q 5-2.** FK 적용시키기
+```sql
+DELETE FROM my_dept
+WHERE deptno = 10;
+
+SELECT * FROM my_emp;
+```
+```sql
+UPDATE my_emp
+SET deptno = 200
+WHERE deptno = 20;
+
+SELECT * FROM my_emp;
+```
+```sql
+INSERT INTO my_emp VALUES(1234, '홍길동', 'CLERK', 7783, NOW(), 500, NULL, NULL);
+
+SELECT *
+FROM my_emp
+LEFT JOIN my_dept USING(deptno);
+-- deptno는 dept에서나 PK지, emp에서는 not null도 아니고 PK도 아니니까 null을 넣을 수 있다. 대신 참조는 불가. 참조를 못해서 dname, loc 다 null로 나온다.
+```
+
+**Q 5-3.** ON DELETE　CASCADE / RESTRICT / NO ACTION  
+SQL에서 FOREIGN KEY 제약조건에 사용되는 ON DELETE 옵션은 참조되는 테이블의 행이 삭제될 때, 참조하는 테이블의 해당 행을 어떻게 처리할지 정의합니다.
+> 1. CASCADE: ON DELETE CASCADE 옵션은 참조되는 테이블의 행이 삭제될 때, 그것을 참조하는 모든 행도 함께 삭제합니다. 이 옵션은 관련된 데이터가 완전히 삭제되어야 할 때 유용합니다.
+> 2. NO ACTION: 기본적으로, ON DELETE NO ACTION은 참조 무결성을 유지하기 위해 참조되는 행의 삭제를 막습니다. 만약 참조되는 테이블의 행이 삭제되려고 하면, SQL 시스템은 오류를 발생시켜 삭제 작업을 방지합니다.
+> 3. RESTRICT: ON DELETE RESTRICT 옵션은 NO ACTION과 유사하게, 참조되는 행이 삭제되는 것을 방지합니다. 하지만, RESTRICT는 명시적으로 삭제를 막는 데 사용되며, 데이터베이스에 따라 NO ACTION과 동작이 다를 수 있습니다.      
+-- NO ACTION(트랜잭션이 종료될 때 오류 발생함), RESTRICT(즉시 오류 발생함). 즉, 기능은 같으나 오류 발생시점이 다름.
+> 4. SET NULL: ON DELETE SET NULL 옵션은 참조되는 테이블의 행이 삭제될 때, 참조하는 테이블의 외래 키 값을 NULL로 설정합니다. 이는 참조 무결성을 유지하면서도, 참조 관계를 끊을 수 있는 방법입니다.
+> 5. SET DEFAULT: ON DELETE SET DEFAULT 옵션은 참조되는 테이블의 행이 삭제될 때, 참조하는 테이블의 외래 키 값을 해당 컬럼의 기본값으로 설정합니다.
+
