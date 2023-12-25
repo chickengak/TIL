@@ -71,7 +71,7 @@ OVER()는 윈도우 함수(창 함수)의 일부로 사용되며, 특히 데이�
 　　　ROWS <범위 또는 행> BETWEEN <시작 행> AND <끝 행>  
 )  
 $＋a$ ) ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING은 현재 행의 이전 행과 다음 행을 포함한 3개의 연속된 행을 창으로 정의
-```MySQL
+```sql
 SELECT SUM(sal)
 FROM emp;
 
@@ -97,7 +97,7 @@ GROUP BY와 비슷한 느낌때문에 헷갈릴 수 있다.
 > - 그래서 각 파티션 내에서 윈도우 함수가 계산되며, 파티션 간에는 결과가 분리됩니다.
 > - 주로 현재 행 주변의 행에 대한 계산을 수행하거나, 결과 집합을 특정 범위 또는 조건에 따라 분할할 때 사용한다. ex) 재무 통계, 시계열 등등..
 
-```MySQL
+```sql
 SELECT deptno, SUM(sal) OVER( PARTITION BY deptno), sal
 FROM emp;
 
@@ -109,7 +109,7 @@ FROM emp;
 
 ### ROW_NUMBER()
 SELECT ROW_NUMBER() [OVER  PARTITION BY, ORDER BY ]	
-```MySQL
+```sql
 SELECT ROW_NUMBER() OVER(ORDER BY ename) AS 'No.', ename    # 인덱싱용 라벨링 가능
 FROM emp;
 
@@ -127,7 +127,7 @@ FROM emp;                                   # 직업별로 그룹화한 후 번�
 ### RANK()　DENSE_RANK()　PERCENT_RANK()
 SELECT RANK() OVER  (PARTITION BY,   ORDER BY)  
 RANK는 중복을 고려하고, DENSE_RANK는 중복을 고려하지 않음. PERCENT_RANK는 0부터 1까지의 범위로 상대적 위치를 계산함. 전부 오름차순으로 랭킹을 매긴다.
-```MySQL
+```sql
 SELECT RANK() OVER(ORDER BY sal DESC) AS 'rank',
         DENSE_RANK() OVER(ORDER BY sal DESC) AS 'dense rank',
         PERCENT_RANK() OVER(ORDER BY sal DESC) AS 'percent rank', sal, ename
@@ -142,7 +142,7 @@ FROM emp;                       # 부서내에서 월급순으로 랭킹 매기�
 ### YEAR()　MONTH()　DAY()　DAYOFWEEK()
 https://dev.mysql.com/doc/refman/8.0/en/expressions.html  
 https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_date-add
-```
+```sql
 SELECT DATE '2012-12-31', DATE '2012/12/31', DATE '2012^12^31', DATE '2012@12@31';
 -- '2012-12-31' 형태가 권장
 SELECT TIMESTAMP'2012-12-31 11:30:45', TIMESTAMP'2012-12-31-11-30-45', TIMESTAMP'2012^12^31 11*30*45';
@@ -207,7 +207,7 @@ FROM emp;
 ```
 
 ### 별칭 사용, 중복 연산　
-```MySQL
+```sql
 SELECT YEAR(hiredate) AS 입사년도, COUNT(*) AS "년도별 입사한 수"
 FROM emp
 GROUP BY 입사년도;                              # GROUP BY 컬럼 별칭 사용 가능.
@@ -224,7 +224,7 @@ GROUP BY YEAR(hiredate);
 
 ### HEX()　UNHEX()
 데이터를 16진법으로 바꾸고 다시 16진법을 텍스트로 바꾸기. 데이터 압축효과가 있다.
-```MySQL
+```sql
 SELECT HEX('cat');                  # 16진법으로
 SELECT X'636174';                   # BLOB로 출력됨
 SELECT BIN(X'636174');              # 11000110110000101110100
@@ -235,7 +235,7 @@ SELECT b'11111111'+0, BIN(b'11111111'), OCT(b'11111111'), HEX(b'11111111');
 ```
 
 ### CHAR_LENGTH()　LENGTH()
-```MySQL
+```sql
 SELECT LENGTH('text'), LENGTH('한글네자'),                      # 4  12
        CHAR_LENGTH('text'), CHAR_LENGTH('한글네자');            # 4  4
 -- LENGTH()는 바이트 기준.
@@ -245,7 +245,7 @@ SELECT LENGTH('text'), LENGTH('한글네자'),                      # 4  12
 GROUP_CONCAT([DISTINCT] expr [,expr ...]  
 　　　　　　　[ORDER BY {unsigned_integer | col_name | expr} [ASC | DESC] [,col_name ...]]  
 　　　　　　　[SEPARATOR str_val])  
-```MySQL
+```sql
 SELECT deptno, GROUP_CONCAT(DISTINCT job ORDER BY(job) SEPARATOR ', ')
 FROM emp
 GROUP BY deptno;                # 각 부서별 직업 목록을 문자열로 합쳐서 출력.
@@ -261,7 +261,7 @@ GROUP BY YEAR(hiredate);            # 입사년도별 입사월일을 ,로 나�
 ```
 
 ### CONCAT()　SUBSTR()
-```MySQL
+```sql
 SELECT empno, CONCAT(ename, " - ", job)
 FROM emp;                                               # '이름 - 직업'으로 출력
 
@@ -295,7 +295,7 @@ SELECT ename, REVERSE(ename)
 ### REGEXP()
 Regular Expression 　/ 테스트 가능한 곳 https://regexr.com/  
 이메일 패턴, 전화번호 패턴, 우편번호 패턴, 주민번호, 운전면허, 여권패턴, 계좌 번호 패턴, url 패턴 등등... 많은곳에 쓰인다.
-```MySQL
+```sql
 SHOW VARIABLES LIKE 'regexp_stack_limit';   # 스택 메모리 제한
 SHOW VARIABLES LIKE 'regexp_time_limit';    # 시간 제한
 
@@ -319,7 +319,7 @@ SELECT *      FROM emp  WHERE REGEXP_LIKE(job, '^[A-Z]+N$');
 ### REGEXP_INSTR()　REGEXP_SUBSTR()
 REGEXP_INSTR(expr, pat[, pos[, occurrence[, return_option[, match_type]]]])  
 REGEXP_INSTR(검색할 문자열, 패턴, 시작위치, 일치항목, 반환 옵션, 유형 옵션])
-```MySQL
+```sql
 SELECT REGEXP_INSTR('Hello, World!', 'o');                      # 5
 SELECT REGEXP_INSTR('Hello, World!', 'o', 1, 2);                # 9
 SELECT REGEXP_INSTR('Hello, World!', 'W', 1, 1, 0, 'c');        # 8
@@ -329,7 +329,7 @@ SELECT REGEXP_SUBSTR('abc def ghi', '[a-z]+', 1, 3);            # ghi
 ```
 
 ### LOAD_FILE()
-```MySQL
+```sql
 SHOW VARIABLES LIKE 'secure_file_priv';     # 경로 확인  \\ 이거나 / 로 경로 구분
 SHOW VARIABLES LIKE 'max_allowed_packet';   # 파일 크기 제한
 
@@ -368,7 +368,7 @@ INSERT INTO my_file(file_content)
 ```
 
 ### MAKE_SET()　ASCII()　STRCMP()　WEIGHT_STRING()
-```MySQL
+```sql
 SELECT MAKE_SET(3, 'hello', 'nice', NULL, 'world'),             # hello,nice
        MAKE_SET(1 | 4, 'hello', 'nice', NULL, 'world'),         # hello
        MAKE_SET(1 | 8, 'hello', 'nice', NULL, 'world'),         # hello,world
