@@ -44,7 +44,7 @@ WHERE deptno IN (
 	SELECT deptno 
     FROM dept 
     WHERE loc = 'CHICAGO' 
-);                          -- cost 3.887
+);                          -- cost 1.6156
 
 EXPLAIN FORMAT=TREE 
 SELECT ename, sal 
@@ -53,13 +53,13 @@ WHERE deptno = (
 	SELECT deptno 
     FROM dept 
     WHERE loc = 'CHICAGO' 
-);                          -- cost 2.85
+);                          -- cost 1.748
 
 EXPLAIN FORMAT=TREE 
 SELECT ename, sal 
 FROM emp 
 LEFT JOIN dept USING(deptno)
-WHERE loc = 'CHICAGO';      -- cost 3.887  아니 조인이 코스트 더 높네;;
+WHERE loc = 'CHICAGO';      -- cost 1.6156  대 조 인
 ```
 
 <br>
@@ -108,14 +108,14 @@ FROM emp
 WHERE empno IN (
     SELECT DISTINCT mgr
     FROM emp
-);                                      -- cost 13.77
+);                                      -- cost 10.349
 
 SELECT DISTINCT m.empno, m.ename 
 FROM emp e
-JOIN emp m ON (e.mgr = m.empno);        -- cost 24.29
+JOIN emp m ON (e.mgr = m.empno);        -- cost 6.549
 
 
--- Q6. 부하직원이 없는 사원의 사원 번호와 이름을 출력하자.
+-- Q6. 부하직원이 없는 사원의 사원 번호와 이름을 출력하자.      ★
 SELECT empno, ename
 FROM emp
 WHERE empno NOT IN (                -- 아무것도 출력 안됨
@@ -213,12 +213,12 @@ WHERE sal = ANY(
 
 
 -- Q13. 각 사원의 봉급이 사원이 속한 부서의 평균 급여보다 얼마나 높은지 출력해보자.
-SELECT ename, sal, sal - avgsal
+SELECT ename, sal, sal - avgsal                     
 FROM emp e
 JOIN (
     SELECT deptno, AVG(sal) AS avgsal
     FROM emp
-    GROUP BY deptno                         -- cost 19.81
+    GROUP BY deptno                         -- cost 13.098
 ) a ON(e.deptno = a.deptno);            -- using은 안되고 on만 됨.
 
 SELECT ename, sal, sal - (
@@ -226,7 +226,7 @@ SELECT ename, sal, sal - (
     FROM emp
     WHERE deptno = e.deptno
 )
-FROM emp e;                             -- cost 4.043 SELECT절 서브 쿼리
+FROM emp e;                           -- cost 15.168 SELECT절 서브 쿼리 ★
 
 -- Q14. EXISTS를 사용해서 부서에 사원이 존재하는 지 확인해보자.
 SELECT deptno, dname
@@ -240,7 +240,7 @@ WHERE  EXISTS(
 
 -- Q15. 각 부서에서 가장 높은 급여를 받는 사원의 모든 내용을 출력하자
 SELECT *
-FROM emp 
+FROM emp e
 WHERE empno IN (
     SELECT empno
     FROM emp, (
@@ -249,7 +249,24 @@ WHERE empno IN (
         GROUP BY deptno
     ) m
     WHERE e.deptno = m.deptno AND sal = m.maxsal
-);                                          -- cost 26.257
+);                                          -- cost 17.998
+
+SELECT *
+FROM emp e, (
+        SELECT deptno, MAX(sal) AS maxsal
+        FROM emp
+        GROUP BY deptno
+    ) m
+WHERE e.deptno = m.deptno AND sal = m.maxsal; -- cost 13.098 응 내가 코스트 더 줄임
+
+SELECT *
+FROM emp e
+LEFT JOIN (
+        SELECT deptno, MAX(sal) AS maxsal
+        FROM emp
+        GROUP BY deptno
+) m USING(deptno)
+WHERE sal = m.maxsal;                      -- cost 13.098 조인써봤는데 똑같네
 
 SELECT *
 FROM emp e
@@ -257,7 +274,7 @@ WHERE sal = (
 	SELECT MAX(sal)
     FROM emp m
     WHERE e.deptno = m.deptno
-);                                      -- cost 4.73 Correlated subqueries
+);                                  -- cost 15.168 Correlated subqueries ★
 
 
 -- Q16. 각부서에서 봉급이 가장 높은 상위 3명의 사원번호, 이름, 봉급, 부서번호를 출력
@@ -268,7 +285,7 @@ WHERE (
     FROM emp e2
     WHERE e2.sal > e1.sal AND e2.deptno = e1.deptno
 ) < 3
-ORDER BY e1.deptno, e1.sal DESC;                    -- cost 4.95
+ORDER BY e1.deptno, e1.sal DESC;                    -- cost 29.168    ★
 /*
 풀이: 먼저 각 부서별로 급여가 높은 순으로 정렬된 사원의 목록을 만든다 > 상위 3명 추출
 1. 주 쿼리는 emp 테이블의 모든 내용을 스캔한다.
@@ -278,7 +295,78 @@ ORDER BY e1.deptno, e1.sal DESC;                    -- cost 4.95
 */
 
 -- Q17. 각 부서에 최근 입사한 사원 2명씩의 사원번호, 이름, 입사일, 부서번호를 출력하자.
+SELECT empno, ename, hiredate, deptno
+FROM emp e1
+WHERE (
+    SELECT COUNT(*)
+    FROM emp e2
+    WHERE e1.deptno = e2.deptno AND e2.hiredate > e1.hiredate
+) < 2
+ORDER BY deptno, hiredate DESC;                   -- cost 29.168    ★
 
+
+-- Q18. 평균 급여가 전체 평균보다 더 높은 부서를 찾아보자.
+SELECT deptno, AVG(sal) AS avgsal
+FROM emp
+WHERE avgsal > (
+    SELECT AVG(sal)
+    FROM emp
+)
+GROUP BY deptno;                        -- 안됨. group by의 조건은 having
+
+SELECT deptno, AVG(sal)
+FROM emp
+GROUP BY deptno
+HAVING AVG(sal) > (
+    SELECT AVG(sal)
+    FROM emp
+);
+
+-- Q19. 부서별로 사원수가 전체 사원수의 평균보다 많은 부서를 찾아 부서번호, 직원수를 출력하자.
+SELECT deptno, COUNT(empno)
+FROM emp
+GROUP BY deptno
+HAVING COUNT(empno) > (
+    SELECT AVG(temp.cnt)
+    FROM (
+        SELECT COUNT(empno) AS cnt
+    FROM emp
+    GROUP BY deptno
+    ) temp
+);
+
+```
+
+
+### 서브쿼리로 테이블 만들기
+```sql
+CREATE TABLE test
+AS 
+SELECT * FROM emp;
+
+CREATE TABLE test02
+AS
+SELECT empno, ename, sal FROM emp;
+
+CREATE TABLE test03 (ename VARCHAR(50))
+AS
+SELECT ename, empno, sal FROM emp;
+
+CREATE TABLE test04 (myname VARCHAR(50))
+AS
+SELECT empno, ename AS myname, sal FROM emp;        -- 컬럼명, 타입 다 바꿀 수 있다
+
+-- CHICAGO에서 근무하는 사원들과 부서에서 근무하는 사원의 이름과 월급으로 새 테이블을 만들어보자.
+
+CREATE TABLE test05 (emp_name VARCHAR(50), sal DECIMAL(10,2))
+AS
+SELECT empno, ename AS emp_name, sal
+FROM emp
+WHERE deptno IN (
+    SELECT deptno
+    FROM dept
+    WHERE loc = 'CHICAGO'
+);
 
 ```
 

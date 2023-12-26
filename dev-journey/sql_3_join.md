@@ -70,16 +70,16 @@ INSERT INTO Y values('C', 3);
 INSERT INTO Y SET  inventory = 1; 
 
 CREATE TABLE salgrade(
-	grade INT,
+	grade VARCHAR(5),
     losal INT,
     hisal INT
 );
 
-INSERT INTO salgrade SET grade = 1, losal = 700, hisal = 1200;
-INSERT INTO salgrade values(2, 1201, 1400);
-INSERT INTO salgrade values(3, 1401, 2000);
-INSERT INTO salgrade values(4, 2001, 3000);
-INSERT INTO salgrade values(5, 3001, 9000);
+INSERT INTO salgrade SET grade = 'E', losal = 700, hisal = 1200;
+INSERT INTO salgrade values('D', 1201, 1400);
+INSERT INTO salgrade values('C', 1401, 2000);
+INSERT INTO salgrade values('B', 2001, 3000);
+INSERT INTO salgrade values('A', 3001, 9000);
 ```
 <br>
 
@@ -366,5 +366,13 @@ cost를 줄이는 쿼리문 팁? 너무 뻔하지만?
 5. distinct 고윳값 추출. 이거 사용 자제해야함.
 6. 조인할 때 크로스 조인같은거 데카르트 곱을 하기 때문에 안함.
 */
+
+SET SESSION profiling = ON; # 프로파일링 기능 활성화
+SET SESSION profiling = OFF; # 프로파일링 기능 활성화
+-- profiling_history_size 세션 변수에 의해 제어됩니다. 이 변수의 기본값은 15이며 최대값은 100입니다. profiling_history_size 값을 0으로 설정하면 프로파일링이 사실상 비활성화됩니다​
+SHOW PROFILES;
+SHOW PROFILE;
+SHOW STATUS LIKE 'Last_query_cost';
+    -- 마지막 실행한 쿼리의 코스트를 알려줌.
 ```
 
