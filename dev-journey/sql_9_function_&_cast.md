@@ -1,4 +1,6 @@
 # 예제를 통한 실전 구문
+### Procedure와 Function의 차이
+Procedure는 리턴이 없고 Function은 리턴이 있다. 물론 Procedure도 변수로 OUT 받으면 비슷하게 구현은 가능하나 명시적 RETURN은 없다.
 
 ## Function
 
