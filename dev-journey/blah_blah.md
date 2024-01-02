@@ -505,3 +505,68 @@ def printer(msg):
 printer('Hi')
 ```
 
+## try except
+```python
+try:
+    예외 발생 가능한 코드
+except <Exception Type>:
+    예외 시 실행할 코드
+else:
+    예외가 발생하지 않을 때 추가로 실행할 코드
+finally:
+    예외와 상관없이 실행할 코드
+
+
+raise <Exception Type>(예외 정보)
+
+
+assert 예외조건
+def get_binary_number(decimal_number):
+    assert isinstance(decimal_number, int)  # 조건이 True면 통과
+    return bin(decimal_number)              # False면 에러.
+```
+
+## 파일의 종류
+**Text 파일**
+- 문자열로 이뤄진 파일. 메모장으로도 열림.
+- 모든 text파일도 실제로는 binary파일. ASCII, Unicode 문자열 집합으로 저장되어서 쉽게 읽힘.
+
+**Binary 파일**
+- 이진형식으로 저장된 파일. 메모장으로 열면 깨짐.
+
+```python
+f = open('abc.txt', 'r')
+contents = f.read()
+print(contents)
+f.close()
+
+with open('abc.txt', 'r') as f:
+    contents = f.readlines()
+    print(contents)
+
+
+import os
+try:
+    os.mkdir('test_folder')
+except FileExistsError as e:
+    print('Already exists')
+
+os.path.exists('test_folder')       # 폴더가 있는지 == isdir()
+os.path.isfile('abc.txt')           # 파일이 있는지
+
+import shutil
+source = 'dream.txt'
+dest = os.path.join('test_folder', 'cde.txt')   # 경로는 이렇게 주는게 바람직 ★
+shutil.copy(source, dest)           # 파일 복사
+
+import pathlib                                  # 경로를 주는 바람직한 방법 2 ★
+temp = pathlib.Path.cwd()   # cwd는 current working directory
+temp.parent                 # 현재 작업 경로의 하나 위 디렉토리
+temp.parent.parent
+```
+
+
+### pickle
+
+
+### logging
