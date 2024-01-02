@@ -455,3 +455,53 @@ asdf\e
 '''
 ```
 
+### first-class objects
+변수나 데이터 구조에 객체를 할당하는 것. 파라미터로 전달 가능 or 리턴으로 전달 가능
+```python
+```
+
+### inner function
+함수 내의 함수
+```python
+def print_msg(msg):
+    def printer():
+        print(msg)
+    printer()
+print_msg('Hi')
+
+# closuer
+def print_msg(msg):
+    def printer():
+        print(msg)
+    return printer      # inner funciton 자체가 리턴됨
+abc = print_msg('Hi')
+abc()
+
+# closure exam
+def tag_func(tag, text):
+    tag = tag
+    text = text
+    def inner_func():
+        return '<{0}>{1}</{0}>'.format(tag, text)
+    return inner_func
+h1_func = tag_func('title', 'This is Python Class')
+p_func = tag_func('p', 'Data Academy')
+```
+
+### decorator
+복잡한 closuer 함수를 간단하게
+```python
+def star(func):
+    def inner(*args, **kwargs):
+        print('*' * 30)
+        func(*args, **kwargs)
+        print('-' * 30)
+    return inner
+
+@star
+def printer(msg):
+    print(msg)
+
+printer('Hi')
+```
+
