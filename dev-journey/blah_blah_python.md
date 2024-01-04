@@ -563,10 +563,63 @@ import pathlib                                  # 경로를 주는 바람직한 
 temp = pathlib.Path.cwd()   # cwd는 current working directory
 temp.parent                 # 현재 작업 경로의 하나 위 디렉토리
 temp.parent.parent
+list(temp.glob('*')) 
 ```
 
 
 ### pickle
+- 파이썬의 객체를 영속화(persistence)하는 built-in 객체  
+- 데이터, object등을 실행 중 2진파일로 저장 -> 불러와서 사용
+- 저장해야 하는 정보, 계산 결과(모델) 등 활용이 많음
+```python
+import pickle
 
+f = open('mypickle.pickle', 'wb')
+test = [1,2,3,4,5]
+pickle.dump(test, f)
+f.close()
+
+del test
+
+f = open('mypickle.pickle', 'rb')
+regen_test = pickle.load(f)
+f.close()
+```
 
 ### logging
+Console 창에만 남기는 기록은 분석시 사용이 불가.  
+그래서 레벨별(개발, 운영)로 기록을 남길 필요가 있음.
+- debug: 개발시 처리 기록을 남겨야하는 로그 정보를 남김
+- info: 처리가 진행되는 동안의 정보를 알림
+- warning: 사용자가 잘못 입력한 정보나 처리는 가능하나 원래 개발시 의도치 않은 정보가 들어왔을 때 알림
+- error: 잘못된 처리로 인해 에러가 났으나, 프로그램은 동작할 수 있음을 알림
+- critical: 잘못된 처리로 데이터 손실 or 프로그램이 중단됨을 알림  
+
+```python
+import logging
+
+logger = logging.getLogger("main")
+#logging.basincConfig(level=logging.DEBUG)
+logger.setLevel(logging.DEBUG)      # 필요에따라 레벨 지정
+
+stream_handler = logging.FileHandler("mylog.log", mode="w", encoding="utf-8")
+logger.addHandler(stream_handler)
+
+logger.debug("틀렸잖아!") 
+logger.info("확인해!")    
+logger.warning("조심해!")  
+logger.error("에러났어!") 
+logger.critical("망했다..")
+
+
+formatter = logging.Formatter('%(asctime)s %(levelname)s %(process)d %(message)s')
+```
+
+로그 설정을 관리하는 방법은 두 가지가 있다.
+- configparser - 파일에
+    - 프로그램의 실행 설정을 파일에 dict타입으로 저장
+- argparser - 실행시점에
+    - 콘솔창에서 프로그램 실행시 설정을 저장함
+
+
+#TODO
