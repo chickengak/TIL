@@ -6,3 +6,8 @@ DP Dynamic Programming
 - set 활용
 
 Two Point Search
+
+
+Queue / Deque  
+- Queue 두 개가 서로에게 pop, append를 할 경우, q1과 q2는 하나의 이어진 리스트로 볼 수 있다.
+    - 하나가 일방적으로 pop, append할 경우 q1 + q2. 서로 pop, append할 경우 q1 + q2 + q1
