@@ -6,7 +6,7 @@ def solution(queue1, queue2):
     sum_queue2 = sum(queue2)
     queue1 = deque(queue1)
     queue2 = deque(queue2)
-    while cnt < (len(queue1)+len(queue2))*4:
+    while cnt < (len(queue1)+len(queue2))*3:
         if sum_queue1 == sum_queue2:
             return cnt
         if sum_queue1 > sum_queue2:
