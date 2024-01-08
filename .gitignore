@@ -3,6 +3,7 @@ desktop.ini
 
 # Test file
 my_test**.py
+input.txt
 
 # Pycharm project
 .idea/
