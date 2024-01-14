@@ -1,13 +1,13 @@
 ## Deep Learning 딥러닝
-딥러닝의 범주와 구분  
+#### 딥러닝의 범주와 구분  
 ![](etc/deep_learning.PNG)
 
-좋은 딥러닝의 3가지 요소
+#### 좋은 딥러닝의 3가지 요소
 1. 구현 실력 Implementation Skills: tensorflow, pytorch...
 2. 수학 실력 Math Skills: Linear Algebra, Probability
 3. 최신 트랜드 Knowing a lot of recent Papers
 
-딥러닝의 주요 요소
+#### 딥러닝의 주요 요소
 - Data
     - 데이터는 해결하고자 하는 문제 유형에 따라 달라진다.  
       Data depend on the type of the problem to solve.
@@ -31,7 +31,24 @@ Neural networks are computing systems vaguely inspired by the biological neural 
 
 In other words, Neural networks are function approximators that stack affine transformations followed by nonlinear transformations.
 
+### 인공 뉴런 Aritificial Neuron
+- 노드와 엣지로 구성
+- 하나의 노드안에서 입력과 가중치를 곱하고 더하는 선형구조.
+- Activation function(활성 함수)을 통해 비선형 구조(non-linear)를 표현 가능.
 
+### 인공 신경망 Artificial Neural Network
+- 여러 개의 인공뉴런들이 모여 연결된 형태
+- 뉴런들이 모인 하나의 단위를 층(layer)라고 하며, 여러 층(multi layer)으로 쌓을 수 있음.
+- Input layer, 1~n Hidden layer, Output layer
+
+&nbsp;
+
+# Basic
+### Tensor 텐서
+
+
+
+&nbsp;
 
 ## Optimization
 Important Concepts in Optimization
