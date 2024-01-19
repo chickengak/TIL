@@ -42,6 +42,9 @@ cf) ~~갑자기 다른 말이지만 github외에 bitbucket, gitlab, jira도 있�
 - `git pull –rebase <upstream> <feature-user>` : 최신 상위 브랜치로 rebase.
 ### `git push` : Update remote refs along with associated objects
 - need more something
+### `git stash` : Stash the changes in a dirty working directory away
+- `git stash -a`
+- `git stash pop`
 
 <br>
 
@@ -145,76 +148,84 @@ git push -f origin main
 <br>
 <br>
 
-## I. 버전관리 Git 명령어 (실습내용. 위를 이해했다면 중요하지 않음.)
-### `git init`: git을 시작함.
-Git으로 코드 관리를 시작
-- 코드 관리 단위(기준): 폴더
-- (master): ~~현재 브랜치명~~
-- .git 폴더 생성: Git 관리와 관련된 파일
-### `git status`: Git 상태 출력. 파일 상태 확인
+# Git 팀원 학습 자료
+여기 기술된 naming convention은 Jin(본인)이 협업 시 편했던 방법이므로, 모든 상황에서 해야만 하는 convention은 아님을 밝힌다.
+
+### add　commit　push　pull　branch　원격 저장소　로컬 저장소
+상기 명령은 다 알고 있다는 가정하에 시작한다.  
+협업을 위해 여기서 배울 내용
+- Issue
+- Pull request
+- --rebase
+- stash
+
+## 새로운 개발을 시작하기 전
+먼저 팀원과 구분된 작업 환경을 만들어야 한다.
+
+Step 1　이슈 발행하기  
+github >> Issues >> New issue  
+무슨 이슈인지에 관해 작성하고 우측 라벨까지 완성할 것.
+
+Step 2　최신 브랜치에서 이슈 번호로 브랜치 생성
 ```bash
-On branch master
-
-No commits yet
-
-nothing to commit (create/copy files and use "git add" to track)
-```
-#### `a.txt` 파일 생성 후
-```bash
-On branch master
-
-No commits yet
-
-Untracked files:
-  (use "git add <file>..." to include in what will be committed)
-        a.txt
-
-nothing added to commit but untracked files present (use "git add" to track)
+git fetch
+git checkout -b Issue#이슈번호 --track main
 ```
 
-#### `git add a.txt` 입력 후
+Step 3　본인이 만든 branch에서 개발 후 commit한다.
+
+Step 4　본인이 만든 branch에 commit한 정보를 원격 저장소에 저장한다.
 ```bash
-On branch master
-
-No commits yet
-
-Changes to be committed:
-  (use "git rm --cached <file>..." to unstage)
-        new file:   a.txt
+git push origin Issue#이슈번호
 ```
 
-### `git commit -m "메시지"`
+Step 5　PR을 요청한다  
+내용과 라벨을 작성 후 팀원의 리뷰가 끝나고 팀원이 PR을 허가를 받는다.  
+스스로 PR을 요청하고 스스로 merge하지 않기. (간단한 문서 작성은 허가하기로 한다)  
+
+Step 6　merge가 완료됐기 때문에 branch를 삭제하고, Issue를 닫는다.
+
+## 개발 중에 팀원이 commit을 해서 내 파일을 최신화하고 싶을 때
+
+방법 1  
+과거의 main에서 분기한 내 branch를 최신 브랜치로 앞 당긴다.
 ```bash
-[master (root-commit) ae9a478] First commit
- 1 file changed, 0 insertions(+), 0 deletions(-)
- create mode 100644 a.txt
+git pull --rebase origin main
+```
+방법 2  
+현재 내 변경사항을 임시로 저장한 후 일단 pull하고 변경사항을 꺼내온다.
+```bash
+git stash -a
+git pull
+git stash pop
 ```
 
-### `git log`
-```bash
-commit ae9a478fbf5173b3fb3d7155521c6a2fcbc63104 (HEAD -> master)
-Author: Jin <peyoumonephu@gmail.com>
-Date:   Tue Nov 28 16:41:14 2023 +0900
+## 최신화 도중 파일이 충돌난 경우
 
-    First commit
+방법 1  
+과거의 main에서 분기한 내 branch를 최신 브랜치로 앞 당긴다.
+```bash
+git pull --rebase origin main
+# 충돌난 파일을 수정 후
+git rebase --continue
 ```
 
-### `git status`
+방법 2  
+현재 내 변경사항을 임시로 저장한 후 일단 pull하고 변경사항을 꺼내온다.
 ```bash
-On branch master
-nothing to commit, working tree clean
+git stash -a
+git pull
+git stash pop
+# 충돌난 파일을 수정
 ```
 
-<br>
+## git 협업 주의사항
+### 절대로 main에 직접 commit push 하지 말 것.
+main 브랜치를 개개인이 수정해버릴 경우, 팀원들의 버전과 코드가 꼬일 수 있음.  
+main 브랜치에는 PR로 merge 하기만 한다.
 
-## II. 백업 Git 명령어
-### `git remote`
-- 원격 저장소 (Remote Repository)에 대한 정보
-- git remote add: 원격 저장소 추가
-    - git remote add [저장소 이름] [저장소 주소]
-    - git remote add origin "http... 주소이름 혹은 SSH"
-
-### `git push`: 원격 저장소에 프로젝트 업로드
+### git이 꼬인 경우
+작업을 하다보면 마음대로 안 되는 경우가 발생할 수 있다. 이럴 땐 삭제 후 원격 저장소에서 다시 clone하는게 맘편하다.
 
 
 
