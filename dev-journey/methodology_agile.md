@@ -16,15 +16,20 @@
 
 - 불확실성이 높은 프로젝트이기 때문에, T 자형 인재(Cross Functional) 이 아니면 힘들다.  
 
+- 변화에 끊임없이 적응해 가면서, **새로운 Use Case 혹은 제품 백로그를 관리해야 한다.**
+> 제품 백로그 (Product Backlog) 구성 요소
+>> 기능(Feature), 결함(Defect), 기술적 작업(Technical Work), 지식(Knowledge)
+
 - 여러 **스프린트 Sprint(=증분 Increment)** 으로 개발한다.
     - 스프린트 Sprint : 계획 - 개발 - 배포
     - 증분과 스프린트는 엄밀하게는 다르지만, 대게 같은 볼륨으로 설정하기 때문에 걍 비슷한 걸 의미한다고 알면됨.
 
-- 변화에 끊임없이 적응해 가면서, **새로운 Use Case를 관리해야 한다.**
-
 - 우선 순위가 높은 기능을 먼저 개발해고 배포해야 한다.
 
+- Sprint를 더 잘게 나눈 것은 To-Do List로 본다.
+
 - 계획된 기간이 끝나면 해당 스프린트를 완료했건 안했건 중단하고 다음 단계로 간다.?
+- 애자일의 범위 분류: 테마(Theme) > 에픽(Epic) > 기능(Feature) > 유저 스토리(User Story)
 
 ### Agile Manifesto = Agile 4 Values
 1. Individuals and interactions over processes and tools
