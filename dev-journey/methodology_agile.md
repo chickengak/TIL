@@ -26,7 +26,7 @@
 
 - 우선 순위가 높은 기능을 먼저 개발해고 배포해야 한다.
 
-- Sprint를 더 잘게 나눈 것은 To-Do List로 본다.
+- 제품 백로그(Product Backlog)를 더 잘게 나눈 것은 To-Do List나 Tasks, Product Backlog Refinement(제품 백로그 상세화)라고 한다.
 
 - 계획된 기간이 끝나면 해당 스프린트를 완료했건 안했건 중단하고 다음 단계로 간다.?
 - 애자일의 범위 분류: 테마(Theme) > 에픽(Epic) > 기능(Feature) > 유저 스토리(User Story)
@@ -57,6 +57,10 @@
 11. 최고의 아키텍처, 요구 사항 및 디자인은 자기 조직화 팀(Self-Organization Team)에서 나온다.
 12. 정기적으로 보다 더 효과적인 방법을 적용해보고, 그에 따라 행동을 조율하고 조정한다.
 
+### Risk & Issue
+- 리스크(Risk)는 작업을 수행하기 전에 예측하는 것이며, 이슈(Issue)는 작업을 수행하면서 대응하는 것이다.
+- 리스크가 발전하여 이슈가 되기 때문에 리스크 관리에 초점을 맞추어야 한다.
+- 리스크를 선제적(Proactive)으로 대응하면, 부정적 이슈가 줄어 들고 긍정적 이슈가 증가한다.
 
 ### Agile 방법론이 적용된 모델들
     - 스크럼(Scrum)
@@ -94,9 +98,29 @@
 - Type 4 : 전체는 Agile 특수한 상황에만 Predictive 도입
     - Agile 사고로 창의적인 개발을 하되, 상세한 개발은 외주를 맡김.
 
+&nbsp;
 
 ## Scrum 스크럼
 - 스크럼 마스터(Scrum master), 개발팀(Dev team), 제품 책임자(Product owner)로 구성
+- Daily Scrum 때, 3 가지 주제
+    - 어제 무엇을 했는가, 오늘 무엇을 할 것인가, 목표 달성에 방해요소가 있는가?
+- Sprint Review
+    - 스프린트가 종료될 때, 관계자들에게 제품 시연하는 것으로, 검토와 조정(Inspect & Adapt)을 하는 구간이다.
+- Sprint Retrospection 스프린트 회고
+    - 스크럼 팀이 자신을 스스로 되돌아 본 후, 다음 스프린트에서는 무엇을 개선할 수 있을지 계획하는게 주목표다.
+    - What went well(잘 수행한 것), What didn't go well(잘 수행하지 못한 것), Any Suggestions(개선 방법에 관한 제안)
+
+
+## Kanban 칸반
+- Sprint 라는 지나치게 짧은 기간안에 업무를 할당하기 힘든 경우. 즉, 긴 기간에 이어 작업이 진행해야 하는 경우 칸반이 유용할 수 있다.
+- 병목 현상(Bottlenecks)을 해결할 수 있다.
+- Kanban은 Work Flow를 Visualization 하는게 주요 특징이다.
+
+![](etc/kanban_workflow.PNG)
+
+## Scrum vs Kanban
+![](etc/scrum_kanban.PNG)
+![](etc/scrum_kanban2.PNG)
 
 &nbsp;
 
