@@ -1,5 +1,5 @@
 # TIL
-Today I Learned.  
+TIL == Today I Learned.
 
 ### [dev-journey](https://github.com/chickengak/TIL/tree/main/dev-journey)
 > What I learnd. This is a directory where I've recorded knowledge learned from various places.
