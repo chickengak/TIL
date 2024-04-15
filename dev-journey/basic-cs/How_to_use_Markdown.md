@@ -78,7 +78,7 @@ $ git push origin master
 니다.
 - 로컬에 이미파일을 저장한 경우 절대 경로가 아닌 상대 경로를 사용하여 이미지를 저장합니다.
 
-![Git_And_Github](etc/git_and_github.PNG)
+![Git_And_Github](../etc/git_and_github.PNG)
 
 
 &nbsp;

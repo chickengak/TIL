@@ -173,8 +173,8 @@ INSERT INTO students VALUES (104, 'Jane', 3);           # Error
 SHOW KEYS FROM students;
 ```
 **테이블의 키 확인**
-![show_keys_from](etc/show_keys_from.PNG)
-![show_keys_from](etc/show_keys_from2.PNG)
+![show_keys_from](../etc/show_keys_from.PNG)
+![show_keys_from](../etc/show_keys_from2.PNG)
 
 <br>
 
@@ -188,7 +188,7 @@ FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS
 WHERE TABLE_NAME IN ('students', 'students07');
 ```
 **테이블의 키를 포함한 모든 제약조건의 이름과 타입을 볼 수 있다.** 즉, 추후에 테이블은 안 건드리고 제약조건을 삭제하고 싶을 때 이런 명령으로 확인해야 한다.
-![inforamtion_schema.table_constraints](etc/inforamtion_schema.table_constraints.PNG)
+![inforamtion_schema.table_constraints](../etc/inforamtion_schema.table_constraints.PNG)
 
 <br>
 
@@ -223,6 +223,6 @@ SHOW CREATE TABLE students07;
 ```
 **테이블의 제약조건 확인.** CREATE로 확인하는거라 테이블 생성될때 제약조건이 보일거 같지만, 의외로 그 테이블의 현재 제약조건이 보인다. (아래 이미지 birthday 확인)  
 https://dev.mysql.com/doc/refman/8.0/en/show.html  
-![show_create_table](etc/show_create_table.PNG)
+![show_create_table](../etc/show_create_table.PNG)
 
 

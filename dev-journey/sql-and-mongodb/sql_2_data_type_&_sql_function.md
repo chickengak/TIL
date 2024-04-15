@@ -105,7 +105,7 @@ SELECT job, SUM(sal) OVER( PARTITION BY job), sal
 FROM emp;
 -- ----------결과물로 GROUP BY와 PARTITION BY를 비교하자 -----------------------
 ```
-![groupby_partitionby](etc/groupby_partitionby.png)
+![groupby_partitionby](../etc/groupby_partitionby.png)
 
 ### ROW_NUMBER()
 SELECT ROW_NUMBER() [OVER  PARTITION BY, ORDER BY ]	

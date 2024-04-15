@@ -139,7 +139,7 @@ UNION
 SELECT empno, ename FROM emp;
 -- UNION은 컬럼 수만 같으면 무조건 합쳐버린다.
 ```
-![sql_union](etc/sql_union.PNG)
+![sql_union](../etc/sql_union.PNG)
 
 ### FULL OUTHER JOIN
 right outer join + left outer join느낌. 해당 명령은 없어진 곳이 많으니 UNION 해야함.  
