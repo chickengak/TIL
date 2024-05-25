@@ -1076,3 +1076,365 @@ ctrl Y, ctrl V 가 반대
 emacs 파일명
 ```
 
+
+<br>
+<br>
+<br>
+
+# 소프트웨어 설치 및 관리
+
+## 패키지
+바이너리 파일을 설치함.
+| 레드햇 계열 | 데비안 계열 |
+|---|---|
+| Fedora, RHEL, CentOS | Debian, Ubuntu, Xandros, Linspire, Kali Linux |
+| rpm, yum | dpkg, apt-get, aptitude |
+
+수세 리눅스: YaST, zypper  
+아키텍처 종류: x86_64, alpha, sparc64, ppc64, i686, noarch  
+<br>
+
+### rpm　RedHat Package Manager
+    name-2.4.6-93.el7.centos.x86_64.rpm
+|   |   |
+|---|---|
+| name | 패키지 이름 |
+| 2.4.6 | 버전 |
+| 93 | 릴리즈 번호 |
+| .el7.centos | CentOS 버전 |
+| .x86_64 | 아키텍처 |
+| .rpm | 확장자 |
+
+```bash
+rpm [옵션] [패키지명]
+```
+- -a　모든 패키지 검색
+- -e　삭제
+- -f　패키지에 대해 질의
+- -F　비교해서 최신일 때 업그레이드
+- -h　설치 시 # 마크 표시
+- -i　설치
+- -K　
+- -V　
+- -q　설치 여부 확인
+- -U　기존 패키지 업그레이드
+- -v　
+- -vv
+- --force　강제로 덮어 쓰기
+- --nodeps
+- --oldpackage
+- --replacepkgs　재설치
+- --replacefiles  
+<br>
+
+### yum　Yellow dog Updater Modified
+- 레드햇 계열의 네트워크 기반 패키지 관리자
+- /etc/yum.repos.d
+- 페도라 22부터는 yum의 문제점을 보완한 dnf 를 사용.
+```bash
+yum [옵션] [명령어] [패키지명]
+```
+- -y install
+- -y update
+- localinstall
+- groupinstall
+- remove
+- groupremove
+- info
+- search
+- check update　업데이트 가능한 패키지 출력
+- check-update
+- list　전체 패키지 정보 출력
+- grouplist
+- history  
+<br>
+
+### dpkg　Debian Package Manager
+- 데비안의 저레벨 패키지 관리자
+```
+name_15.04-32_all.deb
+```
+|   |   |
+|---|---|
+| name | 패키지 이름 |
+| 15.04 | 버전 |
+| 32 | 릴리즈 |
+| all | 아키텍처 |
+| .deb | 확장자 |
+- -c　
+- -i　설치
+- -I　
+- -l　설치된 패키지 목록
+- -L　특정 패키지가 설치한 파일 목록
+- -P　환경설정 파일도 같이 제거
+- -r　제거
+- -s　상세 정보 출력  
+<br>
+
+### apt-get　Advanced Packaging Tool get
+- 데비안 계열의 네트워크 기반 패키지 관리자
+- /etc/apt/source.list ← apt-get이 의존성과 충돌성 해결을 위해 참조하는 파일
+- GTK+ 기반의 GUI 도구는 synaptic
+```bash
+apt-get [옵션] [명령어] [패키지명]
+```
+- -b　소스 패키지를 다운로드한 후 빌드
+- -d　다운로드만 
+- -f　
+- -u　업그레이드 패키지 목록 출력
+- -V　
+- -y　
+
+- autoremove　
+- autoclean　
+- build-dep　
+- check　
+- clean　다운로드한 압축 파일 지우기
+- dist-upgrade　
+- download　
+- install　설치
+- purge　환경설정 파일도 같이 제거
+- remove　제거
+- source　
+- update　새로운 패키지 목록 다운로드
+- upgrade　업그레이드  
+<br>
+
+## 파일 아카이브와 소스 파일
+
+### 파일 아카이브와 압축
+- 여러 개의 파일이나 디렉토리를 하나의 파일로 묶는 것
+- .tar
+```bash
+tar [옵션] [아카이브 이름] [묶여질 파일명]
+```
+- -A　
+- -c　아카이브 파일 생성
+- -C　디렉토리 경로 지정
+- -d　
+- -e　
+- -f　대상 아카이브 지정 (default)
+- -j　bzip2 압축 또는 해제
+- -J　xz 압축 또는 해제
+- -k　
+- -p　
+- -P　
+- -r　tar 파일 마지막에 파일을 추가
+- -t　
+- -u　
+- -U　
+- -v　verbose
+- -w　
+- -x　아카이브에서 파일 추출 = 압축 해제
+- -z　gzip 압축 또는 해제  
+<br>
+
+### 파일 압축과 해제
+- gzip, bzip2, xz, compress, zip, bzcat, zcat  
+<br>
+
+gzip　gunzip
+> .gz
+- -c 
+- -d　압축 해제
+- -f
+- -l　압축 정보 출력
+- -n　n은 1~9로, 9는 최대 압축이지만 느리다.
+- -r　디렉토리를 지정 시, 디렉토리에 포함된 모든 파일을 압축
+- -t
+- -v
+
+bzip2　bunzip2
+> .bz2
+- -c
+- -d　압축 해제
+- -f
+- -k
+- -v
+- -z　압축
+- -1~-9　압축 블록 크기 지정
+
+xz　unxz
+> .xz
+- -d
+- -l
+- -t
+- -z
+
+compress　uncompress
+> .Z
+- -b　
+- -c　*.Z 파일 이름 대신 다른 이름으로 생성
+- -d
+- -f
+- -r
+- -v
+- -V
+
+zip　unzip
+> .zip
+- -e　암호 설정
+- -r
+- -x
+- -1
+- -9
+
+
+### 소스 코드 설치
+- 압축 해제된 소스코드는 컴파일해서 설치할 수 있다.
+- 리눅스의 소스코드는 대부분 C언어
+
+컴파일 순서
+1. ./configure　환경설정 - makefile 생성
+2. make　컴파일 - makefile 기반으로 컴파일
+3. make install　파일 설치
+
+CMake　Cross Platform Make
+- 키트웨어와 컨소시엄에서 개발. 오픈소스
+- 기존의 make 과정을 거치지 않고, 운영체제에 맞게 make 파일을 생성하므로, Meta Make 라고도 한다.
+- 유닉스 계열, 윈도우 계열의 프로그램도 지원. 멀티 플랫폼 지원
+- 소프트웨어 빌드에 특화된 언어로, 독자적인 설정 스크립트를 사용
+- C, C++, Java 등에서는 의존관계를 분석할 수 있다.
+- MS 비주얼 스튜디오, eclips
+- 병렬 빌드와 크로스 컴파일 가능
+
+<br>
+<br>
+<br>
+
+# 주변 장치 관리
+## 장치
+
+### 프린터
+LPRng
+- 버클리. BSD 계열 유닉스에서 사용
+- 초기에 사용된 프린터
+- 스풀링, 네트워크 프린터 지원
+- 설정 파일: /etc/printcap
+
+CUPS
+- 애플. 유닉스 계열에서 사용. 매킨토시나 윈도우 등 대부분의 프린터 지원. 오픈 소스.
+- HTTP 기반의 IPP를 사용하여 웹 기반으로 제어
+- 사용자 및 호스트 기반의 인증 제공
+- 설정 파일 디렉토리: /etc/cups
+- 설정 파일: 프린터 데몬 (cupsd.conf), 프린터 큐 (printers.conf), 프린터 데몬의 클래스 (classes.conf), 프린터 데몬 (cupsd)
+
+### 사운드 카드
+OSS　Open Sound System
+- 1992년 Hannu Sacolainen
+- 표준 유닉스 장치 (POSIX) 에 기반한 인터페이스.
+- 현재는 ALSA로 대체
+
+ALSA　Advanced Linux Sound Architecture
+- 1998년 Jaroslav Kysela
+- GPL 및 LGPL 라이선스 기반으로 배포
+- 설정 파일: /etc/asound.state
+
+### 스캐너
+SANE　Scanner Access Now Easy
+- 스캐너, 캠 등 이미지 관련 하드웨어를 제어하는 API
+- GPL 라이센스. 유닉스 계열. OS2, 윈도우 지원
+
+XSANE　X based interface for the SANE
+- SANE을 이용한 X 윈도 기반 스캐너
+- GTK+ 라이브러리로 만들어짐. xsane 명령으로 실행
+- 스캔 뿐만 아니라 캡처한 이미지 수정도 가능
+- GPL 라이센스. 유닉스 계열. OS2, 윈도우 지원
+
+
+## 명령어
+
+### BSD 계열 프린터
+
+lpr
+> 프린터 작업 요청
+- -C
+- -h
+- -i
+- -j
+- -l
+- -m
+- -P
+- -r
+- -T
+- -#
+
+lpq
+> 프린터 큐에 있는 작업 목록을 출력  
+> lpd 데몬 실행 후 프린터 설정이 제대로 됐는지 확인할 때 유용
+- -a
+- -l
+- -P
+
+lprm
+> 프린터 큐에 대기 중인 작업을 제거. 작업번호나 파일명으로 제거.
+> 작업번호가 지정되지 않았을 경우, 가장 마지막 요청작업을 제거.
+- -　모든 작업 취소
+- -h
+- -P
+- -U
+
+lpc
+> 프린터나 프린터 큐를 제어 및 상태 확인
+
+lpd
+> 프린터 데몬
+
+### System V 계열 프린터
+
+lp
+> 프린터 작업 요청
+- -d
+- -n
+
+lpstat
+> 프린터 큐의 상태를 출력
+- -a
+- -P
+- -t
+
+cancel
+> 프린터 작업을 취소
+- -a
+
+### 사운드 카드
+
+alsactl
+> alsa 사운드 카드를 제어
+- -d
+- -f
+- init
+- store
+- restore
+
+cdparanoia
+> CD로부터 음악 파일을 추출
+- -a
+- -B
+- -w
+
+alsamixer
+> 커서(ncurses) 라이브러리 기반의 오디오 프로그램
+
+### 스캐너
+
+sane-fine-scanner
+> 스캐너 관련 장치 파일을 검색
+- -p
+- -q
+- -v
+
+scanimage
+> 이미지를 스캔
+- -d
+- -L
+- --format
+
+scanadf
+> 자동 문서 공급 장치가 장착된 스캐너에서 여러 개의 사진을 스캔하는 명령
+- -d
+- -L
+
+xcam
+> GUI 기반으로 평판 스캐너나 카메라로부터 이미지를 스캔
+ 
