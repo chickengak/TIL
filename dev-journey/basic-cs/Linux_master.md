@@ -657,17 +657,17 @@ df
 - 사용자 셸 프롬프트 이다. (본 셸 계열: $ , C 셸 계열: %)
 
 본 셸 계열
-|   |   |
-|---|---|
+|   |   |   |
+|---|---|---|
 | 본 셸 | /bin/sh |
 | 콘 셸 | /bin/ksh |
-| 배시 셸 | /bin/bash |
+| 배시 셸 | /bin/bash | GNU 프로젝트 |
 | 지 셸 | /bin/zsh |
 
 C 셸 계열
-|   |   |
-|---|---|
-| C 셸 | /bin/csh |
+|   |   |   |
+|---|---|---|
+| C 셸 | /bin/csh | 버클리대 빌 조이 |
 | TC 셸 | /bin/tcsh |
 
 ### 셸 관련 파일
@@ -765,7 +765,7 @@ history [옵션]
 - !!
 - !n
 - !-n
-- !string
+- !?string　가장 최근에 string으로 시작되는 명령 실행
 - !$ , !!\$
 - !*
 - !?string?
@@ -1220,13 +1220,14 @@ tar [옵션] [아카이브 이름] [묶여질 파일명]
 - -p　
 - -P　
 - -r　tar 파일 마지막에 파일을 추가
-- -t　
+- -t　내용물을 보기만함
 - -u　
 - -U　
 - -v　verbose
 - -w　
 - -x　아카이브에서 파일 추출 = 압축 해제
-- -z　gzip 압축 또는 해제  
+- -z　gzip 압축 또는 해제
+- -Z　compress 압축 또는 해제  
 <br>
 
 ### 파일 압축과 해제
@@ -2034,4 +2035,356 @@ ss
     - 오픈 소스 기반의 차량 멀티미디어 플랫폼 표준화 활동
 
 
+# 추가
+
+## 23년 12월 기출
+
+### 다음 중 LVM 구성할 때 가장 먼저 생성되는 것은?
+
+     1.	VG(Volume Group)
+     2.	LV(Logical Volume)
+     3.	PV(Physical Volume)
+     4.	PE(Physical Extend)
+PV-VG-LV 순서
+
+### 다음은 확장 패키지 관련 저장소를 설치하는 과정이다. (괄호) 안에 들어갈 내용으로 알맞은 것은?
+
+    yum install (괄호)
+     1.	epel
+     2.	epel-repository
+     3.	epel-release
+     4.	epel-download
+epel-release
+
+### 다음중 vi 편집기의 ex 명령모드에 대한 설명으로 틀린 것은?
+
+     2.	w 파일명 → 지정한 '파일명'으로 저장한다.
+위는 맞는 내용
+
+### 다음 중 nano 편집기에서 
+
+     1.	[Ctrl]+[a]  현재 행의 시작 부분으로 커서를 이동
+     2.	[Ctrl]+[e]  현재 행의 끝 부분으로 커서를 이동
+     3.	[Ctrl]+[o]  파일을 저장하고 나가기 위해 사용
+     4.	[Ctrl]+[i]  탭을 삽입합니다.
+
+
+### 다음 중 작업번호가 2번인 백그라운드 프로세스를 종료시키는 명령으로 알맞은 것은?
+
+     1.	kill 2   PID가 2인 프로세스 종료
+     2.	kill %2   정답
+     3.	kill -j 2
+     4.	kill -b 2
+
+### 다음 중 standalone 방식과 inetd 방식에 대한 비교 설명으로 알맞은 것은?
+     
+     1.	inetd 방식이 standalone 방식보다 메모리 관리가 더 효율적이다.
+
+### 다음 보기의 시그널을 번호값이 낮은 순부터 높은 순으로 정렬했을 때 세 번째에 해당하는 시그널 이름으로 알맞은 것은?
+
+     1.	SIGTSTP - 20 : Terminal Stop Signal 프로세스를 대기(suspend)로 전환
+     2.	SIGKILL - 9 : Kill
+     3.	SIGINT - 2 : Terminal Interrupt 
+     4.	SIGTERM - 15 : Termination. kill 시스템 호출시, 가능하면 정상종료 시키는 시그널
+SIGTERM
+
+### 다음 설명에 해당하는 파일명으로 가장 알맞은 것은?
+    모든 사용자에게 적용되는 alias와 함수를 설정하려고 한다.
+
+     1.	/etc/.bashrc
+     2.	/etc/.bash_profile
+     3.	/etc/bashrc
+     4.	/etc/profile
+/etc/bashrc
+
+### 다음 중 (괄호) 안에 들어갈 명령의 결과로 알맞은 것은?
+    user = kaitman
+    echo "$user"
+
+     1.	아무것도 출력되지 않는다.
+     2.	$user
+     3.	ihduser
+     4.	kaitman
+kaitman
+
+
+### 다음은 로그인 셀을 확인하는 과정이다. (괄호) 안에 들어갈 명령어로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220231209/r220231209m35.gif?1702544534)
+
+     1.	ps
+     2.	chsh
+     3.	jobs
+     4.	shells
+ps
+
+### 다음 설명에 해당하는 파일명으로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220231209/r220231209m39.gif?1702544534)
+
+     1.	/etc/fstab   파일 시스템 테이블을 나타내는 파일
+     2.	/etc/mtab   현재 마운트된 파일 시스템에 관한 정보
+     3.	/etc/mounts   실제로 마운트되어 있는지 여부와 관계없이 보여줍니다.
+     4.	/proc/partitions   파티션 정보
+/etc/mtab
+
+### 다음 중 /etc/fstab 파일의 첫 번째 필드에 설정할 수 있는 값으로 틀린 것은?
+
+     1.	UUID
+     2.	LABEL
+     3.	마운트 포인트
+     4.	장치 파일명
+마운트 포인트  
+장치명=/dev=UUID, 라벨명, 네트워크 주소, 파일명
+
+### 다음은 ihduser 사용자의 홈 디렉터리가 차지하고 있는 디스크 용량을 확인하는 과정이다. (괄호) 안에 들어갈 명령어로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220231209/r220231209m41.gif?1702544534)
+
+     1.	df -sh ~ihduser
+     2.	quota ihduser
+     3.	du -sh ~ihduser
+     4.	df -sh /home/ihduser
+du -sh ~ihduser  
+du는 디스크 사용량을 확인. df는 디스크의 남은량을 확인. quota는 디스크 사용량 제한
+
+### 다음 그림에 해당하는 명렁어로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220231209/r220231209m44.gif?1702544534)
+
+     1.	quota
+     2.	edquota
+     3.	repquota
+     4.	xfs_quota
+repquota - report quota
+
+### 	project 그룹에 속한 사용자들이 /project 디렉터리에서 파일 생성은 자유로우나 삭제는 본인의 생성한 파일만 가능하도록 설정하려고 한다. 또한 파일 생성 시 자동으로 그룹 소유권이 project로 부여되도록 설정하려고 한다. /project 디렉터리의 정보가 다음과 같을 때 관련 명령으로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220231209/r220231209m46.gif?1702544534)
+
+     1.	chmod 1770 /project
+     2.	chmod 2770 /project
+     3.	chmod 3770 /project
+     4.	chmod 5770 /project
+
+chmod 3770 /project  
+그룹에 속한 사용자들이 디렉터리에서 파일 생성은 자유로우나 삭제는 본인이 생성한 파일만 가능 => Sticky Bit (1)  
+파일 생성시 자동으로 그룹 소유건이 Project로 부여 되도록 설정 => Set GID(2)  
+Sticky Bit 와 Set GID를 동시에 설정 해야 하므로 1+2 =3
+
+### 다음 명령의 결과로 설정되는 lin.txt 파일의 허가권 값으로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220231209/r220231209m47.gif?1702544534)
+
+     1.	----r-----
+     2.	-r--r--r--
+     3.	-rw-r--r--
+     4.	-rw-rw----
+3번
+
+### 다음 상황에 적합한 클리스터링 기술로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220231209/r220231209m52.gif?1702544534)
+
+     3.	고가용성 클러스터
+
+### 다음 중 SYN Flooding 공격과 같은 네트워크 상태 정보를 확인하는 명령으로 알맞은 것은?
+
+     1.	ip
+     2.	arp
+     3.	route
+     4.	netstat
+netstat
+
+### 다음 설명에 해당하는 파일명으로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220231209/r220231209m54.gif?1702544534)
+
+     1.	/etc/hosts
+     2.	/etc/resolv.conf
+     3.	/etc/sysconfig/network
+     4.	/etc/sysconfig/network-scripts
+/etc/resolv.conf
+
+### 다음 중 시스템에 설정된 게이트웨이 주소값을 확인하는 명령어로 틀린 것은?
+     
+     1.	ip
+     2.	route
+     3.	netstat
+     4.	ethtool
+ethtool
+
+<br>
+
+## 23년 9월
+
+### 1.	project 그룹에 속한 사용자들이 /project 디렉터리에서 파일 생성은 자유로우나 삭제는 본인이 생성한 파일만 가능하도록 설정하려고 한다. /project 디렉터리의 정보가 다음과 같을 때 관련 명령으로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220230909/r220230909m1.gif?1694553791)
+
+     1.	chmod g+s /project
+     2.	chmod g+t /project
+     3.	chmod o+s /project
+     4.	chmod o+t /project
+4.	chmod o+t /project
+
+### 다음 중 특수 권한을 부여해서 사용하는 경우의 예로 가장 거리가 먼 것은?
+     
+     1.	Sticky-Bit를 파일에 부여한다.
+     2.	Set-UID를 실행 파일에 부여한다.
+     3.	Set-GID를 실행 파일에 부여한다.
+     4.	Set-GID를 디렉터리에 부여한다.
+1.	Sticky-Bit를 파일에 부여한다.
+
+### 다음 결과에 대항하는 명령어로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220230909/r220230909m7.gif?1694553792)
+
+     1.	lsblk - 트리로 보여줌
+     2.	blkid - UUID로 보여줌
+     3.	fdisk
+     4.	df
+lsblk
+
+### 다음 중 최근에 실행한 명령 중에 'al'이라는 문자열을 포함한 명령을 찾아서 실행하는 명령으로 알맞은 것은?
+
+     1.	!?al
+
+### ls 명령으로 에일리어스(alias)가 설정된 상태에서 원래의 ls 명령어를 실행하려고 한다. 다음 중 관련 설명으로 알맞은 것은?
+
+     3.	ls 명령어 앞에 \ 기호를 덧붙여서 실행한다.
+
+### 	다음 (괄호) 안에 들어갈 내용으로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220230909/r220230909m19.gif?1695071370)
+
+     1.	exec
+     2.	fork
+     3.	init
+     4.	systemd
+fork
+
+### 다음 중 kill 명령어를 실행할 때 전달되는 기본 시그널 명칭과 번호의 조합으로 알맞은 것은?
+     
+     1.	SIGKILL, 9
+     2.	SIGKILL, 15
+     3.	SIGTERM, 9
+     4.	SIGTERM, 15
+SIGTERM, 15
+
+### 다음 중 포어그라운드 프로세스를 백그라운드 프로세스로 전환하기 위해 사용하는 키 조합으로 알맞은 것은?
+     
+     1.	[Ctrl] + [c]
+     2.	[Ctrl] + [a]
+     3.	[Ctrl] + [z]
+     4.	[Ctrl] + [d]
+[Ctrl] + [z] 로 작업을 일시중지 하고 bg로 백그라운드 실행하면 된다.
+
+
+### 다음 명령의 결과에 대한 설명으로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220230909/r220230909m24.gif?1694553791)
+
+     1.	bash 프로세스의 우선순위를 높인다.
+     2.	bash 프로세스의 우선순위를 낮춘다.
+     3.	bash 프로세스의 PRI 값을 -10으로 변경한다.
+     4.	사용법 오류로 인해 실행되지 않는다.
+4.	사용법 오류로 인해 실행되지 않는다.
+
+### 다음은 프로세스 아이디가 513, 514, 515번인 프로세스를 종료시키는 과정이③ (괄호) 안에 들어갈 명령어로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220230909/r220230909m26.gif?1694553791)
+
+     1.	kill
+     2.	pkill
+     3.	killall
+     4.	pgrep
+kill
+
+### 다음 그림에 해당하는 명령어로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220230909/r220230909m27.gif?1694553791)
+
+     1.	ps
+     2.	top
+     3.	jobs
+     4.	pstree
+top
+
+### 다음 중 vi 편집기의 명령 모드에서 바로 직전에 삭제한 줄을 다시 복원하기 위해 실행하는 명령으로 알맞은 것은?
+
+     1.	c   변경 명령을 시작하는데 사용
+     2.	r   하나의 문자를 다른 문자로 교체
+     3.	u   undo
+     4.	dd
+
+### 다음 중 vi 편집기에서 한 줄이 linux인 경우에만 전부 Linux로 치환하는 명령으로 알맞은 것은?
+
+
+     1.	:% s/^linux$/Linux/g
+     2.	:% s/linux/^Linux$/g
+     3.	:% s/\<linux\>/Linux/g
+     4.	:% s/linux/\<Linux\>/g
+1.	:% s/^linux$/Linux/g
+
+### 다음 중 vi 편집기에서 행 번호가 표시되도록 하는 ex 모드 환경설정으로 알맞은 것은?
+
+     1.	set no      = set nonu nu 기능 off
+     2.	set ai   자동 들여쓰기
+     3.	set sm   괄호 입력시 자동으로 대응되는 괄호 표시
+     4.	set number   = set nu
+
+### 	다음 중 현재 디렉터리에 있는 C 언어 파일만을 source.tar로 묶는 명령으로 알맞은 것은?
+
+     2.	tar rvf source.tar *.c   r은 기존 압축파일에 파일 추가
+     4.	tar cvf source.tar *.c
+
+### 47.	다음 중 LVM에 대한 설명으로 틀린 것은?
+     
+     1.	물리적 디스크 2개를 이용해서 하나의 파티션으로 구성할 수 있다.
+     2.	파티션의 크기를 확장해도 데이터의 손실이 발생하지 않는다.
+     3.	파티션의 크기를 축소해서 데이터의 손실이 발생하지 않는다.
+     4.	물리적 디스크 1개를 이용해서 두 개의 파티션을 구성할 수 있다.
+정답 3  
+LVM = Logical Volume Management - 파티션 관리하며 용량 확장
+
+### 다음 결과에 해당하는 명령으로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220230909/r220230909m54.gif?1694553791)
+
+     1.	echo $DISPLAY
+     2.	xhost list $DISPLAY
+     3.	xauth list $DISPLAY
+     4.	export DISPLAY
+3.	xauth list $DISPLAY  
+xhost 뒤에는 ip주소가 와야함.
+
+### 다음 중 패킷 교환 방식에 대한 설명으로 틀린 것은?
+     
+     1.	패킷별로 우선순위를 부여할 수 있다.
+     2.	회선 교환 방식과 비교해서 지연이 적게 발생한다.
+     3.	각각의 패킷마다 오버헤드 비트가 존재한다.
+     4.	고정 대역을 할당하지 않는 관계로 이론상으로는 무제한 수용이 가능하다.
+
+2.	회선 교환 방식과 비교해서 지연이 적게 발생한다. X 더 발생함.
+
+### 60.	다음 설명에 해당하는 기술로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220230909/r220230909m60.gif?1694553791)
+
+     1.	FDDI
+     2.	X.25
+     3.	Frame Relay
+     4.	Cell Relay
+1.	FDDI
+
+### 다음 중 시스템에 장착된 이더넷 카드의 MAC 주소를 확인하는 명령으로 알맞은 것은?
+     
+     1.	ip
+     2.	route
+     3.	mii-tool
+     4.	ethtool
+정답은 ip 이나 ethtool도 가능
+
+### 74. 다음 설명에 해당하는 파일명으로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220230909/r220230909m74.gif?1694553792)
+
+     1.	/etc/hosts
+     2.	/etc/resolv.conf
+     3.	/etc/sysconfig/network
+     4.	/etc/sysconfig/network-scripts
+1.	/etc/hosts
+
+### 79.	다음 설명에 해당하는 프로그램으로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220230909/r220230909m79.gif?1694553792)
+
+     1.	Docker
+     2.	OpenStack
+     3.	Kubernetes
+     4.	Ansible
+Kubernetes
 
