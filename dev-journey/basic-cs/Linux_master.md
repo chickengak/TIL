@@ -1980,11 +1980,14 @@ ss
 
 오픈소스 하이퍼 바이저
 - Xen
+    - 케임브리지대
     - 전가상화, 반가상화 가능. 단, 반가상화 구성 시에는 QEMU 기반
     - 반가상화 시에 호스트와 다른 아키텍처를 게스트로 실행 불가
 - KVM
-    - CPU는 전가상화만 가능
+    - Qumranet
+    - CPU는 전가상화만 가능. x86 기반
     - RHEV가 대표적
+    - QEMU라는 CPU에뮬레이터 사용
 - Virtual Box
     - 이노테크 - 오라클
     - 전가상화만 지원 (x86, Intel-64, AMD-64 다 가능)
@@ -2387,4 +2390,470 @@ xhost 뒤에는 ip주소가 와야함.
      3.	Kubernetes
      4.	Ansible
 Kubernetes
+
+<br>
+
+## 23년 6월
+
+### 1.	다음 설명의 상황에 설정해야 하는 작업으로 가장 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220230610/r220230610m1.gif?1703227203)
+
+     1.	project 디렉터리에 부여된 w 권한을 제거한다.
+     2.	project 디렉터리에 Set-UID를 부여한다.
+     3.	project 디렉터리에 Set-GID를 부여한다.
+     4.	project 디렉터리에 Sticky-Bit를 부여한다.
+4번
+
+### 3.	다음 중 특수 권한이 설정된 파일이나 디렉터리로 알맞은 것은?
+     
+     1.	/etc
+     2.	/etc/shadow
+     3.	/etc/passwd
+     4.	/usr/bin/passwd
+4. /usr/bin/passwd  
+/usr/bin/passwd 파일은 사용자의 비밀번호를 변경할 때 사용되는 실행 파일로, 일반 사용자도 자신의 비밀번호를 변경할 수 있도록 setuid 특수 권한이 설정되어 있음.
+
+### 5.	다음은 ihduser 사용자에게 대한 디스크 쿼터를 설정하는 과정이다. ( 괄호 ) 안에 들어갈 명령어로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220230610/r220230610m5.gif?1703227204)
+
+     1.	quota          디스크 사용량이나 상태정보를 표시
+     2.	edquota        텍스트 편집기같은 인터페이스를 제공
+     3.	setquota       -u 옵션 사용 시
+     4.	xfs_quota      -x -c 옵션 사용 시 xfs_quota 명령어
+
+### 8.	다음 중 파일 시스템이 ext4인 /dev/sdb1 파티션을 /data 디렉터리로 마운트하는 명령으로 알맞은 것은?
+     
+     1.	mount –o ext4 /data /dev/sdb1
+     2.	mount –o ext4 /dev/sdb1 /data
+     3.	mount –t ext4 /data /dev/sdb1
+     4.	mount –t ext4 /dev/sdb1 /data
+정답 4  
+-t = 파일 시스템의 유형을 지정하는데 사용  
+-o = 마운트할 때 사용할 옵션을 지정하는데 사용
+
+### 24.	다음 중 백그라운드로 실행 중인 데몬을 확인하는 방법으로 알맞은 것은?
+     
+     1.	jobs 명령어를 사용해서 확인한다.
+     2.	fg 명령어를 사용해서 확인한다.
+     3.	bg 명령어를 사용해서 확인한다.
+     4.	ps 명령어를 사용해서 확인한다.
+4번  
+1. jobs 명령어는 현재 셸 세션에서 실행된 백그라운드 작업의 상태를 보여주지만,
+셸 세션과 관련된 작업에 한정되므로 시스템 전체에서 실행 중인 데몬을 확인하는 데 사용할 수 없습니다.
+4. ps 명령어는 현재 시스템에서 실행 중인 모든 프로세스(데몬 포함)의 정보를 제공
+
+### 31.	다음 그림에 해당하는 편집기로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220230610/r220230610m31.gif?1703227204)
+
+     1.	pico
+     2.	nano
+     3.	emacs
+     4.	gedit
+emacs - File, Edit 이 있음
+
+### 33.	다음 중 vi 편집기에서 단어의 시작이 linux 인 경우에만 전부 Linux로 치환하는 명령으로 알맞은 것은?
+     
+     1.	:% s/^linux/Linux/g
+     2.	:% s/\<linux/Linux/g
+     3.	:% s/Linux/^linux/g
+     4.	:% s/Linux/\<linux/g
+문장의 시작이 linux인 경우라면 1번이 정답이지만,  
+linux 단어를 Linux를 치환하기 위한 것이라면 2번이 정답입니다.
+
+### 34.	다음 중 vi 편집기에서 환경 설정한 내용을 계속해서 사용하기 위해 등록하는 파일명으로 알맞은 것은?
+     
+     1.	.virc      != vim을 위한 설정 파일은 vimrc
+     2.	.exrc      = vi 편집기에서 사용자가 환경 설정
+     3.	dd
+     4.	s
+
+### 36.	다음 설명에 해당하는 패키지 관리 도구로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220230610/r220230610m36.gif?1703227204)
+
+     1.	alien
+     2.	dselect
+     3.	dnf
+     4.	apt-get
+alien
+
+
+### 41.	다음 중 rpm 명령의 설치 관련 옵션으로 가장 거리가 먼 것은?
+     
+     1.	-i        설치
+     2.	-U        업그레이드
+     3.	-F        freshen, 업그레이드 또는 설치
+     4.	-f
+
+### 42.	다음 중 미설치된 sendmail 패키지에 대한 자세한 정보를 확인하는 명령으로 알맞은 것은?
+     
+     1.	rpm –qi sendmail    이미 설치된 패키지에 대한 정보를 조회
+     2.	yum –qi sendmail
+     3.	yum list sendmail   설치되어 있는지 여부
+     4.	yum info sendmail   정답
+
+### 53.	다음 명령의 결과에 대한 설명으로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220230610/r220230610m53.gif?1703227204)
+
+     1.	X 클라이언트를 실행하면 권한이 없는 관계로 허가 거부된다.
+     2.	X 클라이언트를 실행하면 원격지 시스템의 첫 번째 X 서버에 실행된다.
+     3.	X 클라이언트를 실행하면 로컬 시스템의 첫 번째 X 서버에 실행된다.
+     4.	X 클라이언트를 실행하면 원격지 시스템에서 허가 거부된다.
+정답 3
+
+### 60.	다음 설명에 해당하는 프로그램으로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220230610/r220230610m60.gif?1703227204)
+
+     1.	Docker         컨테이너, 이미지 형태로 패키지 관리 및 배포 플랫폼
+     2.	Openstack      오픈 소스 클라우드컴퓨팅 플랫폼
+     3.	Kubernetes     Docker 자동화 플랫폼
+     4.	Ansible        오픈 소스 자동화 플랫폼
+정답 4
+
+### 70.	다음 중 게이트웨이 주소를 확인하는 명령어로 알맞은 것은?
+     
+     1.	ifconfig
+     2.	ifstat
+     3.	ss
+     4.	route
+4번
+
+### 73.	다음 중 UDP 프로토콜과 가장 관련 있는 서비스로 알맞은 것은?
+     
+     1.	TELNET
+     2.	SMTP
+     3.	DNS
+     4.	HTTP
+DNS
+
+### 77.	다음에서 설명하는 해당하는 명령으로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220230610/r220230610m77.gif?1707293429)
+
+     1.	telnet www.kait.or.kr@443
+     2.	telnet www.kait.or.kr 443
+     3.	telnet www.kait.or.kr 21
+     4.	telnet www.kait.or.kr 22
+SFTP는 (SSH File Transfer Protocol)의 약자임.  
+말 그대로 SSH를 사용하기 때문에 22번 포트를 확인해야함.
+
+<br>
+
+## 23년 3월
+
+### 3.	다음 중 파일이나 디렉터리에 부여된 Set-UID나 Set-GID와 같은 특수 권한을 확인하는 명령어로 알맞은 것은?
+     
+     1.	ls
+     2.	chmod
+     3.	chown
+     4.	umask
+1번 ls -l로 확인
+
+### 6.	다음 중 fdisk 실행 상태에서 파티션을 삭제할 때 사용하는 명령으로 알맞은 것은?
+     
+     1.	d    파티션 삭제
+     2.	r    없음
+     3.	e    없음
+     4.	x    전문가용 추가기능 나열
+
+### 7.	다음 내용이 기록된 파일명으로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220230311/r220230311m7.gif?1680877130)
+
+     1.	/etc/fstab
+     2.	/etc/mtab
+     3.	/etc/mounts
+     4.	/etc/partitions
+2번
+
+### 12.	다음 중 특정 사용자에게 부여된 로그인 셸이 기록된 파일명으로 알맞은 것은?
+     
+     1.	/etc/shells
+     2.	/etc/passwd
+     3.	˜/.bashrc
+     4.	˜/.bash_profile
+/etc/passwd
+
+### 23.	다음 설명에 해당하는 명칭으로 가장 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220230311/r220230311m23.gif?1680877130)
+
+     1.	inetd
+     2.	xinetd
+     3.	standalone
+     4.	daemon
+daemon
+
+
+### 26.	프로세스 아이디(PID)가 1222인 bash 프로세스의 우선순위(NI)값이 0이다. 다음 중 이 프로세스의 NI값을 10으로 우선순위를 변경하는 명령으로 알맞은 것은?
+     
+     1.	nice 10 1222
+     2.	nice -10 1222
+     3.	nice 10 bash
+     4.	nice -10 bash
+정답 4번  
+양수는 -n  
+음수는 --n
+
+### 30.	다음 중 nano 편집기에서 프로그램을 종료하는 키 조합으로 알맞은 것은?
+     
+     1.	[Ctrl]+[a] : 행의 맨 앞으로 커서 이동
+     2.	[Ctrl]+[e] : 행의 맨 끝으로 커서 이동
+     3.	[Ctrl]+[c] : 현현재 커서 위치의 줄번호와 열번호를 표시
+     4.	[Ctrl]+[x] : 나노 편집기 종료, 변경사항 저장 여부 물어봄
+
+### 41.	다음 결과에 해당하는 명령으로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220230311/r220230311m41.gif?1680877130)
+
+     1.	rpm –ql vsftpd      패키지가 설치한 설치한 파일목록을 출력.
+     2.	rpm –qa vsftpd      시스템에 설치된 모든 패키지 정보를 출력.
+     3.	rpm –qV vsftpd      패키지를 검증
+     4.	rpm –qip vsftpd-3.0.2-29.el7_9.x86_64.rpm    패키지 파일에 대한 정보를 출력.
+
+### 47.	다음 설명에 해당하는 LVM 용어로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220230311/r220230311m47.gif?1680877130)
+
+     1.	PV
+     2.	PE
+     3.	VG
+     4.	LV
+PE
+
+### 50.	다음 설명에 해당하는 명칭으로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220230311/r220230311m50.gif?1680877130)
+
+     1.	XFree86
+     2.	Wayland
+     3.	X.org
+     4.	Metacity
+1.	XFree86
+
+### 64.	다음 설명에 해당하는 국제기구로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220230311/r220230311m64.gif?1680877130)
+
+     1.	EIA
+     2.	IEEE
+     3.	ITU
+     4.	ANSI
+1.	EIA
+
+### 66.	다음 중 OSI 계층 기준으로 가장 많은 계층을 지원하는 장치로 알맞은 것은?
+     
+     1.	HUB            1계층
+     2.	Repeater       1계층
+     3.	Bridge         2계층
+     4.	Gateway        4계층
+4. Gateway
+
+### 71.	다음 중 SSH와 관련된 서비스로 가장 거리가 먼 것은?
+     
+     1.	nfs            네트워크 파일 시스템
+     2.	scp            SSH 기반의 원격 파일 전송 프로토콜
+     3.	rsh            원격 명령을 실행하는 프로토콜 SSH로 대체됨
+     4.	sftp           SSH 파일 전송 프로토콜 FTP의 SSH버전
+1. nfs
+
+
+### 78.	다음 중 IPv4의 C클래스 대역에 할당된 사설 IP 주소의 네트워크 개수로 알맞은 것은?
+     
+     1.	32
+     2.	64
+     3.	128
+     4.	256
+4.	256
+
+<br>
+
+## 22년 9월
+
+### 3.	다음 설명에 해당하는 LVM 관련 용어로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220220903/r220220903m3.gif?1663151727)
+
+     1.	볼륨 그룹(VG)
+     2.	논리적 볼륨(LV)
+     3.	물리적 볼륨(PV)
+     4.	물리적 확장(PE)
+2.	논리적 볼륨(LV)  
+물리적인 볼륨(PV) (하드)를 하나로 모아 블록단위로 쪼갠것이 (PE),  
+이 블록들의 집합이 VG.  
+집합에서 필요량 만큼 "할당"받아 만드는 것이 논리적볼륨(LV)
+
+### 5.	다음 중 인터넷상에서 원격으로 인쇄하기 위해 사용되는 프로토콜명으로 알맞은 것은?
+     
+     1.	IPP
+     2.	LPRng
+     3.	CUPS
+     4.	PPD
+1.	IPP - Internet Printing Protocol
+
+### 8.	다음 중 소스 파일을 이용한 설치 방법이 나머지 셋과 다른 것은?
+     
+     1.	Apache httpd
+     2.	MySQL
+     3.	PHP
+     4.	Nmap
+MySQL - cmake 사용. 나머지는 make
+
+
+### 27.	다음 ( 괄호 ) 안에 들어갈 내용으로 가장 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220220903/r220220903m27.gif?1717711123)
+
+     1.	㉠ standalone, ㉡ foreground
+     2.	㉠ standalone, ㉡ background
+     3.	㉠ daemon, ㉡ foreground
+     4.	㉠ daemon, ㉡ background
+4.	㉠ daemon, ㉡ background
+
+
+### 30.	다음 중 [Ctrl]+[z] 키 조합으로 실행했을 때 발생하는 시그널명과 번호의 조합으로 알맞은 것은?
+     
+     1.	SIGSTOP, 19
+     2.	SIGSTOP, 20
+     3.	SIGTSTP, 19
+     4.	SIGTSTP, 20
+4.	SIGTSTP, 20  
+[Ctrl]+[z] 키워드는 SIGTSTP 20  
+[Ctrl]+[z] 가 쓰이지않는 SIGSTOP 19
+
+### 35.	다음 설명에 해당하는 파일로 가장 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220220903/r220220903m35.gif?1669582361)
+
+     1.	˜/.bashrc
+     2.	˜/.bash_history
+     3.	˜/.bash_profile
+     4.	˜/.bash_logout
+환경변수는 profile / 별칭은 bashrc
+
+### 41.	다음은 /project 디텍터리를 포함해서 하위 디렉터리 및 파일의 그룹 소유권을 project로 변경하는 과정이다. ( 괄호 ) 안에 들어갈 내용으로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220220903/r220220903m41.gif?1663151727)
+
+     1.	chgrp -r
+     2.	chgrp -R
+     3.	chmod -r
+     4.	chown -r
+2.	chgrp -R
+
+### 43.	다음 결과에 해당하는 명령어로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220220903/r220220903m43.gif?1663151727)
+
+     1.	fdisk
+     2.	mount
+     3.	df
+     4.	du
+2.	mount
+
+### 47.	다음 중 사용자 디스크 쿼터 설정을 위해 /etc/fstab 파일에 설정하는 옵션 값으로 틀린 것은?
+     
+     1.	quota          파일 용량 개수 설정
+     2.	uquota         xfs파일에 적용
+     3.	usrquota       사용자 할당량 사용
+     4.	userquota
+4.	userquota
+
+### 62.	다음 중 로컬 네트워크상에 있는 다른 호스트의 MAC 주소를 확인할 때 사용하는 명령으로 알맞은 것은?
+     
+     1.	ip
+     2.	ss
+     3.	arp
+     4.	ifconfig
+3.	arp
+
+### 64.	다음 중 CentOS 7 버전에서 이더넷 카드(Ethernet Card)를 장착했을 때 나타나는 장치명의 형식으로 가장 알맞은 것은?
+     
+     1.	lo
+     2.	eth0
+     3.	enp0s3
+     4.	virbr0
+3.	enp0s3
+
+### 70.	다음 설명에 해당하는 명칭으로 가장 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220220903/r220220903m70.gif?1663151728)
+
+     1.	X.25
+     2.	ATM
+     3.	DQDB
+     4.	FDDI
+3.	DQDB
+
+<br>
+
+## 22년 6월
+
+### 17.	다음 중 vi 편집기에서 모든 windows라는 문자열을 linux로 치환하는 명령으로 알맞은 것은?
+     
+     1.	:% s/linux/windows/g
+     2.	:% s/windows/linux/g
+     3.	:% s/\<linux\>/windows/g
+     4.	:% s/\<windows\>/linux/g
+2.	:% s/windows/linux/g
+
+### 18.	vim 편집기 실행할 때마다 행 번호가 자동으로 표시되도록 설정하려고 한다. 다음 중 관련 설정을 저장하기 위해 생성해야 할 파일명으로 알맞은 것은?
+     
+     1.	.virc
+     2.	.vimrc
+     3.	.viex
+     4.	.vimex
+2.	.vimrc
+
+###  20.	다음 중 emacs 편집기를 종료하는 조합으로 알맞은 것은?
+     
+     1.	[Ctrl]+[c] 후에 [Ctrl]+[x]
+     2.	[Ctrl]+[x] 후에 [Ctrl]+[c]
+     3.	[Ctrl]+[c] 후에 [Ctrl]+[f]
+     4.	[Ctrl]+[x] 후에 [Ctrl]+[f]
+ 2.	[Ctrl]+[x] 후에 [Ctrl]+[c]
+
+### 40.	다음은 마운트된 /backup 영역을 마운트 해제하는 과정이다. ( 괄호 ) 안에 들어갈 명령어로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220220611/r220220611m40.gif?1657003192)
+
+     1.	umount
+     2.	unmount
+     3.	eject
+     4.	nohup
+1.	umount
+
+### 41.	다음 그림에 해당하는 명령어로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220220611/r220220611m41.gif?1657003192)
+
+     1.	du
+     2.	df
+     3.	mount
+     4.	fdisk
+2.	df  
+df 명령어가 시스템 전체의 디스크 공간을 확인하는 명령어라면, du 명령은 특정 디렉토리를 기준으로 디스크 사용량을 확인할 수 있습니다.
+
+### 44.	다음은 /home 영역에 설정된 사용자 쿼터 정보를 확인하는 과정이다. ( 괄호 ) 안에 들어갈 명령어로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220220611/r220220611m44.gif?1657003192)
+
+     1.	quota
+     2.	edquota
+     3.	setquota
+     4.	repquota
+4.	repquota
+
+### 47.	다음은 원격지의 윈도우 시스템에 공유된 폴더를 마운트하는 과정이다. ( 괄호 ) 안에 들어갈 내용으로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220220611/r220220611m47.gif?1657003192)
+
+     1.	ntfs
+     2.	cifs
+     3.	samba
+     4.	xfs
+2.	cifs  
+윈도우 시스템에 공유된 폴더 마운트 : cifs, smb
+
+### 50.	다음 설명에 해당하는 가상화 기술로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220220611/r220220611m50.gif?1657003192)
+
+     1.	KVM
+     2.	XEN
+     3.	VirtualBox
+     4.	Hyper-V
+1.	KVM
+
+### 66.	다음 중 게이트웨이(Gateway) 주소를 확인하는 명령어로 알맞은 것은?
+     
+     1.	nslookup
+     2.	ifconfig
+     3.	arp
+     4.	route
+4.	route  
+게이트웨이 주소 확인 명령어 : route, netstat -r
+
+ㅁㄴㅇㄹ
 
