@@ -1,6 +1,8 @@
 # temporary files
 temp.py
 test.py
+temp.*
+samples/
 
 # Deep learning log files
 logs/
