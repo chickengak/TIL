@@ -39,3 +39,9 @@
 > ADsP 후기 겸 공부 팁 공유. 바뀌고 있는 경향성 분석.
 
 <img src="https://velog.velcdn.com/images/peyoumonephu/post/32b7956c-eb78-4379-ba14-aa31e9ac692d/image.jpg" width="500px">
+
+<br>
+
+### [ADsP 후기 작성하고 책 받은 썰](https://velog.io/@peyoumonephu/ADsP-%ED%9B%84%EA%B8%B0-%EC%9E%91%EC%84%B1%ED%95%98%EA%B3%A0-%EC%B1%85-%EB%B0%9B%EC%9D%80-%EC%8D%B0)
+> 난 그저 평소처럼 후기를 썼을 뿐인데 4만원 책이 공짜로? ㄴㅇ0ㅇㄱ
+
