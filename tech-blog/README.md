@@ -45,3 +45,4 @@
 ### [ADsP 후기 작성하고 책 받은 썰](https://velog.io/@peyoumonephu/ADsP-%ED%9B%84%EA%B8%B0-%EC%9E%91%EC%84%B1%ED%95%98%EA%B3%A0-%EC%B1%85-%EB%B0%9B%EC%9D%80-%EC%8D%B0)
 > 난 그저 평소처럼 후기를 썼을 뿐인데 4만원 책이 공짜로? ㄴㅇ0ㅇㄱ
 
+<img src="https://velog.velcdn.com/images/peyoumonephu/post/05d5b2f9-2877-46d8-bb7a-df7a5c8372ef/image.png" width="400px">
