@@ -63,7 +63,88 @@
 부트 매니저는 부팅할 때 사용자의 PC에 설치되어 있는 운영체제 중 하나를 선택하여 부팅하는 기능
 
 ### 부트 로더
+컴퓨터를 사용자가 사용할 수 있도록 하드디스크에 저장된 운영체제를 주기억장치에 적재해주는 프로그램
 - Boot Loader. Bootstrap Loader의 약자
+- 운영체제가 실행되기 전에 미리 실행되어, 커널이 안정적으로 실행되기 위한 모든 관련 작업을 완료하는 프로그램
+- 여러개의 운영체제가 설치되어 있을 경우 선택하여 부팅. (멀티 부팅)
+
+| LILO (Linux Loader) | GRUB (Grand Unified Bootloader) |
+|---|---|
+| 리눅스에서만 사용 가능 | 리눅스 외에도 사용 가능  |
+|   | LILO의 단점 보완 |
+|   | 대화형이므로, 커널의 경로와 파일 이름만 알면 부팅 가능 |
+|   | 메뉴설정 환경을 지원, 대화형 모드로 부트 정보 설정 가능 |
+
+GRUB 환경설정 파일 내용
+- p.59
+
+GRUB 편집 모드
+- p.60
+
+### 런레벨
+- 부팅 시 init 프로세스가 참조하는 것이 런레벨.
+- 런 레벨은 0 ~ 6 이 있다.
+
+런레벨 실행 스크립트 파일
+- init.d
+- rc.local
+- rc0.d ~ rc6.d
+
+런레벨 운영 모드
+
+| 런레벨 | 운영모드 |
+|---|---|
+| 0 | Halt |
+| 1 | Single User Mode |
+| 2 | Multi User Mode (without networking) |
+| 3 | Multi User Mode (only console login) |
+| 4 | Not Used |
+| 5 | Multi User Mode with Display Manager |
+| 6 | Reboot |
+
+### 로그인 및 로그아웃
+
+### 시스템 종료 명령어
+shutdown
+```bash
+shutdown [옵션] [시간] [경고 메시지]
+```
+- -c　종료 명령 취소
+- -h　안전하게 종료
+- -k　
+- +m　m분 후에 종료
+- -P　강제 종료
+- -r　재시작
+- -t　시간 지정
+
+init
+```bash
+init [런 레벨]
+```
+
+halt
+```bash
+halt [옵션]
+```
+- 옵션 없이 사용하면, 모든 프로세스는 종료되지만 전원은 꺼지지 않는다.
+- -f　강제 종료. 포로세스, 전원 모두 꺼진다.
+
+poweroff
+```bash
+poweroff
+```
+
+reboot
+```bash
+reboot [옵션]
+```
+- -r　강제 재시작
+
+
+## 파일 시스템과 파티션
+### 파일 시스템
+- 파일에 대한 다양한 종류의 접근제어 방법을 제공
+
 
 <br>
 <br>
