@@ -3057,5 +3057,119 @@ df 명령어가 시스템 전체의 디스크 공간을 확인하는 명령어�
 4.	route  
 게이트웨이 주소 확인 명령어 : route, netstat -r
 
-ㅁㄴㅇㄹ
+<br>
+
+## 21년 12월
+
+### 4.	다음 설명과 같은 상황에서 사용해야 하는 기술로 가장 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220211211/r220211211m4.gif?1639376645)
+
+     1.	LVM
+     2.	RAID
+     3.	Bonding
+     4.	Clustering
+1.	LVM  
+LVM(Logical Volume Manager)는 리눅스의 저장 공간을 효율적이고 유연하게 관리하기 위한 커널의 한 부분이다.
+
+유연한 용량 조절  
+크기 조절이 가능한 storage pool  
+편의에 따른 장치 이름 지정  
+disk striping, mirror volume등을 제공한다.
+
+### 10.	다음 중 yum 기반으로 작업한 목록을 확인하는 명령으로 알맞은 것은?
+     
+     1.	yum list
+     2.	yum worklist
+     3.	yum work list
+     4.	yum history
+4.	yum history
+
+### 11.	다음은 묶여있는 tar 파일을 /usr/local/src 디렉터리에 푸는 과정이다. ( 괄호 ) 안에 들어갈 내용으로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220211211/r220211211m11.gif?1639376644)
+
+     1.	-d
+     2.	-D
+     3.	-c
+     4.	-C
+
+### 24.	다음은 ihduser가 cron 설정을 하는 과정이다. ( 괄호 ) 안에 들어갈 명령어의 옵션으로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220211211/r220211211m24.gif?1639376645)
+
+     1.	-n
+     2.	-e
+     3.	-i
+     4.	-u
+2.	-e  
+-u <user>  define user  
+-e         edit user's crontab  
+-i         prompt before deleting  
+-n <host>  set host in cluster to run users' crontabs
+
+### 29.	다음 중 [Ctrl]+[\] 입력 시에 전송되는 시그널로 알맞은 것은?
+     
+     1.	SIGINT         ctrl + c
+     2.	SIGHUP
+     3.	SIGQUIT        ctrl + \
+     4.	SIGTERM        
+                         ctrl + z = SIGTSTP
+
+
+### 38.	다음은 ihduser가 본인에게 도착하는 메일 관련 파일의 경로를 확인하는 과정이다. ( 괄호 ) 안에 들어갈 환경 변수명으로 알맞은 것은?
+![](https://img.comcbt.com/cbt/data/r2/r220211211/r220211211m38.gif?1639376645)
+
+     1.	$MAIL
+     2.	$MAILFILE
+     3.	$MAILCHECK
+     4.	$MAILSPOOL
+
+### 46.	/etc/fstab의 총 6개의 필드로 구성되어 있는데, 마운트되는 디렉터리(mount point)는 몇 번째 필드인가/
+     
+     1.	첫 번째
+     2.	두 번째
+     3.	세 번째
+     4.	네 번째
+2.	두 번째  
+[파일시스템 장치] [마운트 포인트] [파일시스템 종류] [옵션] [덤프] [파일점검 옵션]
+
+
+### 48.	다음 중 Set-UID 또는 Set-GID와 같은 특수 권한이 설정된 파일로 알맞은 것은?
+     
+     1.	/usr/bin/passwd
+     2.	/usr/sbin/useradd
+     3.	/etc/passwd
+     4.	/etc/shadow
+1.	/usr/bin/passwd
+
+### 60.	다음 중 프로토콜이 다른 통신망을 상호 접속하기 위한 통신장비로 알맞은 것은?
+     
+     1.	게이트웨이(Gateway)
+     2.	라우터(Router)
+     3.	리피터(Repeater)
+     4.	브리지(Bridge)
+1.	게이트웨이(Gateway)  
+라우터는 osi 3,4 layer에서 wan, lan 연결에서 사용되고 게이트웨이는 osi5에서 프로토콜이 다른 네트웤을 연결할때 사용된다고 합니다  
+브리지(Bridge) : 특정 네트워크로부터 오는 통신량을 조절하여 트래픽을 관리
+
+### 63.	다음 중 공인 IP 주소로 알맞은 것은?
+     
+     1.	192.168.0.1
+     2.	165.141.105.240
+     3.	172.30.255.254
+     4.	10.10.10.100
+2.	165.141.105.240  
+사설 IP 주소 : 공식적인 승인 없이 사용할 수 있는 주소  
+               라우팅이 불가능하고 인터넷상에서 사용할 수 없음  
+               A 클래스 10.0.0.0 ~ 10.255.255.255  
+               B 클래스 172.16.0.0 ~ 172.31.255.255  
+               C 클래스 192.168.0.0 ~ 192.168.255.255  
+
+### 
+64.	다음 중 OSI 7계층의 네트워크 계층과 관련된 프로토콜로 알맞은 것은?
+     
+     1.	BGP
+     2.	TCP
+     3.	UDP
+     4.	SMB
+1. BGP : 라우팅 프로토콜(네트워크계층)의 한종류(RIP, OSPF, BGP)
+
 
