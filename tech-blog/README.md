@@ -38,7 +38,7 @@
 ### [ADsP 후기 및 공부 방법](https://velog.io/@peyoumonephu/41%ED%9A%8C-%EC%9D%B4%ED%9B%84-%ED%95%84%EB%8F%85-ADsP-%ED%9B%84%EA%B8%B0-%EB%B0%8F-%EA%B3%B5%EB%B6%80-%EB%B0%A9%EB%B2%95-%EB%B0%94%EB%80%8C%EB%8A%94-%EA%B2%BD%ED%96%A5%EC%84%B1)
 > ADsP 후기 겸 공부 팁 공유. 바뀌고 있는 경향성 분석.
 
-<img src="https://velog.velcdn.com/images/peyoumonephu/post/32b7956c-eb78-4379-ba14-aa31e9ac692d/image.jpg" width="500px">
+<img src="https://velog.velcdn.com/images/peyoumonephu/post/f9391565-efae-400a-8f78-eb69a0008ffa/image.png">
 
 <br>
 
