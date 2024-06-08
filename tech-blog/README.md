@@ -46,3 +46,10 @@
 > 난 그저 평소처럼 후기를 썼을 뿐인데 4만원 책이 공짜로? ㄴㅇ0ㅇㄱ
 
 <img src="https://velog.velcdn.com/images/peyoumonephu/post/05d5b2f9-2877-46d8-bb7a-df7a5c8372ef/image.png" width="400px">
+
+<br>
+
+### [리눅스 마스터 2급 합격 후기](https://velog.velcdn.com/images/peyoumonephu/post/f9391565-efae-400a-8f78-eb69a0008ffa/image.png)
+> 리눅스 마스터 후기 겸 공부 팁 공유.
+
+<img src="https://velog.velcdn.com/images/peyoumonephu/post/55abdf8e-93d7-4e19-b3fe-15799bd4740e/image.jpg" width="400px">
