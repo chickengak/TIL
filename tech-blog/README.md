@@ -53,3 +53,12 @@
 > 리눅스 마스터 후기 겸 공부 팁 공유.
 
 <img src="https://velog.velcdn.com/images/peyoumonephu/post/55abdf8e-93d7-4e19-b3fe-15799bd4740e/image.jpg" width="400px">
+
+<br>
+
+### [빅데이터 분석기사 합격 후기](https://velog.io/@peyoumonephu/%EB%B9%85%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B6%84%EC%84%9D%EA%B8%B0%EC%82%AC-%ED%95%A9%EA%B2%A9-%ED%9B%84%EA%B8%B0)
+> 빅데이터 분석기사 후기 겸 공부 팁 공유
+
+<img src="https://velog.velcdn.com/images/peyoumonephu/post/8dd1d207-b863-478a-bac5-5d812e8062c5/image.png" width="400px">
+
+
