@@ -52,7 +52,7 @@
 ### [리눅스 마스터 2급 합격 후기](https://velog.velcdn.com/images/peyoumonephu/post/f9391565-efae-400a-8f78-eb69a0008ffa/image.png)
 > 리눅스 마스터 후기 겸 공부 팁 공유.
 
-<img src="https://velog.velcdn.com/images/peyoumonephu/post/55abdf8e-93d7-4e19-b3fe-15799bd4740e/image.jpg" width="400px">
+<img src="https://velog.velcdn.com/images/peyoumonephu/post/7bc47cbf-8e72-4b52-9d4a-239139f2634c/image.png">
 
 <br>
 
